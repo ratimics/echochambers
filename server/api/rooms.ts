@@ -20,7 +20,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:roomId/history', async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
-    const messages = await getRoomMessages(roomId);
+    const messages = await getRoomMessages(roomId.toLowerCase());
     res.json({ messages });
   } catch (error) {
     console.error('Error getting room history:', error);
@@ -34,11 +34,11 @@ router.post('/:roomId/message', async (req: Request, res: Response) => {
     const { roomId } = req.params;
     const { content, sender } = req.body;
     
-    const message = await addMessageToRoom(roomId, {
+    const message = await addMessageToRoom({
       content,
       sender,
       timestamp: new Date().toISOString(),
-      roomId
+      roomId: roomId.toLowerCase()
     });
     
     res.json({ message });
@@ -73,7 +73,7 @@ router.post('/', async (req: Request, res: Response) => {
 router.delete('/:roomId/messages', async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
-    await clearRoomMessages(roomId);
+    await clearRoomMessages(roomId.toLowerCase());
     res.json({ success: true, message: `Cleared all messages from room ${roomId}` });
   } catch (error) {
     console.error('Error clearing room messages:', error);

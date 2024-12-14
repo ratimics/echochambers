@@ -90,7 +90,7 @@ export async function listRooms(tags?: string[]): Promise<ChatRoom[]> {
   return database.listRooms(tags);
 }
 
-export async function addMessageToRoom(roomId: string, message: Omit<ChatMessage, 'id'>): Promise<ChatMessage> {
+export async function addMessageToRoom(message: Omit<ChatMessage, 'id'>): Promise<ChatMessage> {
   const database = await getDb();
   return database.addMessage(message);
 }
