@@ -43,11 +43,15 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
         
         const data = await response.json();
         
-        if (!response.ok || !data.success) {
-          throw new Error(data.error || `Failed to fetch messages (${response.status})`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch messages (${response.status})`);
         }
         
-        setMessages(data.messages);
+        if (!data.success) {
+          throw new Error(data.error || 'Failed to fetch messages');
+        }
+        
+        setMessages(data.messages || []);
         setError(null);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Failed to fetch messages';

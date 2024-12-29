@@ -17,8 +17,17 @@ export async function GET(
 
     const messages = await getRoomMessages(roomId);
     
+    if (!messages) {
+      return NextResponse.json({ 
+        messages: [],
+        roomId,
+        success: false,
+        error: "No messages found"
+      });
+    }
+    
     return NextResponse.json({ 
-      messages: messages || [],
+      messages,
       roomId,
       success: true
     });
