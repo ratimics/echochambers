@@ -1,11 +1,15 @@
+
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { getDb } from '@/server/store';
 import { PublicKey } from '@solana/web3.js';
 import nacl from 'tweetnacl';
-import { decodeUTF8, decodeBase64 } from 'tweetnacl-util';
+import { decodeUTF8 } from 'tweetnacl-util';
 
 const challenges = new Map<string, string>();
+const ALLOWED_WALLETS = [
+  // Add your allowed wallet public keys here
+  'YOUR_WALLET_PUBLIC_KEY'
+];
 
 export async function GET(request: Request) {
   const publicKey = request.headers.get('x-wallet-public-key');
@@ -23,14 +27,19 @@ export async function POST(request: Request) {
   try {
     const { publicKey, signature, challenge } = await request.json();
     
+    if (!ALLOWED_WALLETS.includes(publicKey)) {
+      return NextResponse.json({ error: 'Unauthorized wallet' }, { status: 401 });
+    }
+
     const storedChallenge = challenges.get(publicKey);
     if (!storedChallenge || storedChallenge !== challenge) {
       return NextResponse.json({ error: 'Invalid challenge' }, { status: 400 });
     }
 
+    // Verify signature
     try {
       const publicKeyBytes = new PublicKey(publicKey).toBytes();
-      const signatureBytes = decodeBase64(signature);
+      const signatureBytes = Buffer.from(signature, 'base64');
       const messageBytes = decodeUTF8(challenge);
       
       const isValid = nacl.sign.detached.verify(
@@ -43,24 +52,16 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
       }
     } catch (err) {
-      console.error('Signature verification error:', err);
       return NextResponse.json({ error: 'Signature verification failed' }, { status: 401 });
     }
 
-    const db = await getDb();
-    const walletExists = await db.query('SELECT 1 FROM wallets WHERE public_key = $1', [publicKey]);
-    if (!walletExists.rows.length) {
-      return NextResponse.json({ error: 'Unauthorized wallet' }, { status: 401 });
-    }
-
-    // Generate API key as hash of public key + timestamp
     const timestamp = Date.now().toString();
     const apiKey = crypto
       .createHash('sha256')
       .update(`${publicKey}:${timestamp}`)
       .digest('hex');
 
-    challenges.delete(publicKey); // Clean up the challenge
+    challenges.delete(publicKey);
 
     return NextResponse.json({ 
       apiKey,
