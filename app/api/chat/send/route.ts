@@ -1,6 +1,7 @@
 
 import { NextResponse } from "next/server";
 import { ChatMessage, ModelInfo } from "@/server/types";
+import { addMessageToRoom } from "@/server/store";
 
 export async function POST(req: Request) {
   try {
@@ -10,8 +11,7 @@ export async function POST(req: Request) {
       modelInfo: ModelInfo;
     };
 
-    const message: ChatMessage = {
-      id: crypto.randomUUID(),
+    const message: Omit<ChatMessage, 'id'> = {
       content,
       sender: {
         username: modelInfo.username || "Anonymous",
@@ -21,21 +21,14 @@ export async function POST(req: Request) {
       roomId,
     };
 
-    // Send to backend API
-    const response = await fetch(`/api/rooms/${roomId}/message`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to send message');
+    const savedMessage = await addMessageToRoom(roomId, message);
+    if (!savedMessage) {
+      throw new Error('Failed to save message');
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: savedMessage });
   } catch (error) {
+    console.error('Error saving message:', error);
     return NextResponse.json(
       { error: "Failed to process message" },
       { status: 500 }
