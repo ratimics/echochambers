@@ -16,8 +16,8 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-// Get room history
-router.get('/:roomId/history', async (req: Request, res: Response) => {
+// Get room messages
+router.get('/:roomId/messages', async (req: Request, res: Response) => {
   try {
     const { roomId } = req.params;
     const messages = await getRoomMessages(roomId);
