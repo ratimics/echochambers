@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -49,7 +48,7 @@ export default function WalletConnect() {
       });
 
       if (response.ok) {
-        const { apiKey } = await response.json();
+        const { apiKey } = await response.json(); // Changed to apiKey for consistency with the alert message.  Assumes the backend now returns an apiKey instead of sessionToken.
         localStorage.setItem('apiKey', apiKey);
         alert(`Your API key: ${apiKey}`);
       } else {
