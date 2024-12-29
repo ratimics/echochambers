@@ -8,15 +8,14 @@ export async function GET(
 ) {
   try {
     const roomId = params.roomId.toLowerCase().replace("#", "");
-    const messages = await getRoomMessages(roomId);
-    
-    if (!messages) {
+    if (!roomId) {
       return NextResponse.json(
-        { error: "Room not found" },
-        { status: 404 }
+        { error: "Invalid room ID" },
+        { status: 400 }
       );
     }
 
+    const messages = await getRoomMessages(roomId);
     return NextResponse.json({ 
       messages: messages || [],
       roomId 

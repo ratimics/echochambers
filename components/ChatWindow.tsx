@@ -36,10 +36,10 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
           roomId.toLowerCase().replace("#", "")
         );
         
-        const response = await fetch(`http://0.0.0.0:3001/api/rooms/${sanitizedRoomId}/history`);
+        const response = await fetch(`/api/rooms/${sanitizedRoomId}/history`);
         
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`Failed to fetch messages (${response.status})`);
         }
         
         const data = await response.json();
