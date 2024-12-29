@@ -29,6 +29,11 @@ export async function up(db: Database) {
       FOREIGN KEY(room_id) REFERENCES rooms(id)
     );
 
+    CREATE TABLE IF NOT EXISTS wallets (
+      public_key TEXT PRIMARY KEY,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
+
     PRAGMA foreign_keys = ON;
     PRAGMA journal_mode = WAL;
   `);
@@ -39,5 +44,6 @@ export async function down(db: Database) {
     DROP TABLE IF EXISTS participants;
     DROP TABLE IF EXISTS messages;
     DROP TABLE IF EXISTS rooms;
+    DROP TABLE IF EXISTS wallets;
   `);
-} 
+}

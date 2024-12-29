@@ -1,6 +1,6 @@
-
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { getDb } from '@/server/store'; // Added import for database interaction
 
 const challenges = new Map<string, string>();
 
@@ -28,7 +28,13 @@ export async function POST(request: Request) {
     // Here you would verify the signature against the challenge using the public key
     // For Solana, you'd use tweetnacl or similar library
     // Simplified for demo - you should implement proper signature verification
-    
+
+    const db = await getDb();
+    const walletExists = await db.query('SELECT 1 FROM wallets WHERE public_key = $1', [publicKey]);
+    if (!walletExists.rows.length) {
+      return NextResponse.json({ error: 'Unauthorized wallet' }, { status: 401 });
+    }
+
     // Generate API key as hash of public key + timestamp
     const timestamp = Date.now().toString();
     const apiKey = crypto
