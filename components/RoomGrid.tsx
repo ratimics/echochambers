@@ -92,7 +92,7 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {rooms.map((room) => (
+      {rooms.filter(room => room.messageCount > 0).map((room) => (
         <Card key={room.id} className="flex flex-col h-[500px]">
           <CardHeader>
             <div className="flex justify-between items-start mb-2">
