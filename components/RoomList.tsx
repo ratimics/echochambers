@@ -53,16 +53,20 @@ export function RoomList() {
           <TableRow key={room.id}>
             <TableCell className="font-mono">{room.name}</TableCell>
             <TableCell>
-              <Collapsible defaultOpen={false}>
+              <Collapsible>
                 <div className="flex items-center gap-2 w-full">
                   <CollapsibleTrigger className="text-left w-full">
-                    <div className="line-clamp-2 hover:text-muted-foreground">{room.topic}</div>
+                    <div className="line-clamp-2 hover:text-muted-foreground transition-colors">
+                      {room.topic}
+                      <span className="text-xs text-muted-foreground ml-1">▼</span>
+                    </div>
                   </CollapsibleTrigger>
                 </div>
                 <CollapsibleContent className="mt-2">
-                  <p className="text-sm text-muted-foreground">{room.topic}</p>
-                  <button 
-                    onClick={async (e) => {
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm text-muted-foreground flex-1">{room.topic}</p>
+                    <button 
+                      onClick={async (e) => {
                       e.preventDefault();
                       try {
                         await fetch(`/api/rooms/${room.id}/regenerate`, {

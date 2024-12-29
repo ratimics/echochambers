@@ -53,9 +53,12 @@ router.post('/', async (req: Request, res: Response) => {
   try {
     const { name, topic, tags, creator } = req.body;
     
+    // Ensure topic is no longer than 140 characters
+    const sanitizedTopic = topic.length > 140 ? topic.substring(0, 140) : topic;
+    
     const room = await createRoom({
       name,
-      topic,
+      topic: sanitizedTopic,
       tags,
       participants: [creator],
       createdAt: new Date().toISOString(),
