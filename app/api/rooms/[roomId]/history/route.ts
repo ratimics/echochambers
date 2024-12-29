@@ -4,10 +4,10 @@ import { getRoomMessages } from "@/server/store";
 
 export async function GET(
   request: Request,
-  context: { params: { roomId: string } }
+  { params }: { params: { roomId: string } }
 ) {
   try {
-    const roomId = context.params.roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
+    const roomId = params.roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
     if (!roomId || !/^[a-z0-9-]+$/.test(roomId)) {
       return NextResponse.json(
         { error: "Invalid room ID" },
