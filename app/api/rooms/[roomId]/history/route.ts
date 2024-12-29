@@ -14,6 +14,8 @@ export async function GET(
         { status: 400 }
       );
     }
+    
+    return NextResponse.json({ messages: [] });
 
     const messages = await getRoomMessages(roomId);
     
