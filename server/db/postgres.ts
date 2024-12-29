@@ -6,10 +6,26 @@ export class PostgresAdapter implements DatabaseAdapter {
   private pool: Pool | null = null;
   
   async initialize(): Promise<void> {
-    this.pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-    });
+    const maxRetries = 5;
+    let retries = 0;
+    
+    while (retries < maxRetries) {
+      try {
+        this.pool = new Pool({
+          connectionString: process.env.DATABASE_URL,
+          ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+          host: '0.0.0.0'
+        });
+        
+        // Test the connection
+        await this.pool.query('SELECT 1');
+        break;
+      } catch (error) {
+        retries++;
+        if (retries === maxRetries) throw error;
+        await new Promise(resolve => setTimeout(resolve, 1000 * retries));
+      }
+    }
 
     // Check if tables exist
     const { rows: [result] } = await this.pool.query(`

@@ -47,7 +47,7 @@
     "express": "^4.21.1",
     "input-otp": "^1.4.1",
     "lucide-react": "^0.460.0",
-    "next": "15.0.3",
+    "next": "14.1.0",
     "next-themes": "^0.2.1",
     "pg": "^8.13.1",
     "react": "^18",
