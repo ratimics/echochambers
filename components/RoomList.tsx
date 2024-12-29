@@ -86,9 +86,18 @@ export function RoomList() {
                   variant="secondary"
                   onClick={async () => {
                     try {
-                      await fetch(`/api/rooms/${room.id}/regenerate`, {
+                      const response = await fetch(`/api/rooms/${room.id}/regenerate`, {
                         method: 'POST',
                       });
+                      if (!response.ok) throw new Error('Failed to regenerate');
+                      const fetchRooms = async () => {
+                        const response = await fetch('http://0.0.0.0:3001/api/rooms');
+                        const data = await response.json();
+                        if (data.rooms) {
+                          setRooms(data.rooms);
+                        }
+                      };
+                      await fetchRooms();
                     } catch (error) {
                       console.error('Error regenerating description:', error);
                     }
