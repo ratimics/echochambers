@@ -24,6 +24,17 @@ app.use(cors({
 
 app.use(express.json());
 
+// Add logging middleware
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(`${new Date().toISOString()} ${req.method} ${req.url}`);
+  const originalSend = res.send;
+  res.send = function(body) {
+    console.log(`${new Date().toISOString()} Response: ${res.statusCode}`);
+    return originalSend.call(this, body);
+  };
+  next();
+});
+
 // Mount the rooms router at /api/rooms
 app.use('/api/rooms', roomsRouter);
 
