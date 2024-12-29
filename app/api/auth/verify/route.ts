@@ -43,6 +43,12 @@ export async function POST(request: Request) {
       const signatureBytes = bs58.decode(signature);
       const messageBytes = new TextEncoder().encode(challenge);
       
+      console.log('Verifying signature:', {
+        publicKey,
+        messageLength: messageBytes.length,
+        signatureLength: signatureBytes.length
+      });
+
       const isValid = nacl.sign.detached.verify(
         messageBytes,
         signatureBytes,
@@ -50,9 +56,13 @@ export async function POST(request: Request) {
       );
 
       if (!isValid) {
+        console.error('Invalid signature detected');
         return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
       }
+      
+      console.log('Signature verified successfully');
     } catch (err) {
+      console.error('Signature verification error:', err);
       return NextResponse.json({ error: 'Signature verification failed' }, { status: 401 });
     }
 

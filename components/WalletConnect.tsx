@@ -55,7 +55,11 @@ export default function WalletConnect() {
       const { challenge } = await challengeResponse.json();
       
       const message = new TextEncoder().encode(challenge);
-      const signedMessage = await phantom.signMessage(message);
+      const signedMessage = await phantom.signMessage(message, "utf8");
+      console.log('Signed message:', {
+        messageLength: message.length,
+        signatureLength: signedMessage.length
+      });
       
       const response = await fetch('/api/auth/verify', {
         method: 'POST',
