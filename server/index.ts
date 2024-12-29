@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import roomsRouter from './api/rooms';
-import { initializeDatabase } from './db';
+import { createAdapter } from './db';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = parseInt(process.env.PORT || '3001', 10);
 const HOST = '0.0.0.0';
 
 app.use(cors({
@@ -16,7 +16,7 @@ app.use('/api/rooms', roomsRouter);
 
 async function start() {
   try {
-    await initializeDatabase();
+    const db = await createAdapter();
     app.listen(port, HOST, () => {
       console.log(`Server running on port ${port}`);
     });
