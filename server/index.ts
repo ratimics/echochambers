@@ -4,7 +4,7 @@ import cors from 'cors';
 import roomsRouter from './api/rooms';
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = Number(process.env.PORT) || 3002;
 
 // Configure CORS
 app.use(cors({
