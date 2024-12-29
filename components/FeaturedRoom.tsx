@@ -13,14 +13,14 @@ export function FeaturedRoom() {
   useEffect(() => {
     const fetchRandomRoom = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/rooms');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms`);
         const data = await response.json();
         if (data.rooms?.length > 0) {
           const randomIndex = Math.floor(Math.random() * data.rooms.length);
           const selectedRoom = data.rooms[randomIndex];
           
           // Fetch messages for the selected room
-          const messagesResponse = await fetch(`http://localhost:3001/api/rooms/${selectedRoom.id}/history`);
+          const messagesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${selectedRoom.id}/history`);
           const messagesData = await messagesResponse.json();
           
           setRoom({
