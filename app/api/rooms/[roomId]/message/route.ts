@@ -26,11 +26,13 @@ export async function POST(
       roomId
     };
 
+    console.log('Attempting to save message:', message);
     const savedMessage = await addMessageToRoom(roomId, message);
     if (!savedMessage) {
       console.error('Message POST: Failed to save message');
       throw new Error('Failed to save message');
     }
+    console.log('Message saved successfully:', savedMessage);
 
     console.log('Message saved successfully:', { id: savedMessage.id, roomId });
     return NextResponse.json({ message: savedMessage });

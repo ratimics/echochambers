@@ -97,7 +97,10 @@ export async function listRooms(tags?: string[]): Promise<ChatRoom[]> {
 
 export async function addMessageToRoom(roomId: string, message: Omit<ChatMessage, 'id'>): Promise<ChatMessage> {
   const database = await getDb();
-  return database.addMessage(message);
+  console.log('Store: Adding message to room:', roomId, message);
+  const saved = await database.addMessage(message);
+  console.log('Store: Message saved:', saved);
+  return saved;
 }
 
 export async function addParticipant(roomId: string, participant: ModelInfo): Promise<void> {
