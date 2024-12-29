@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { getDb } from '@/server/store'; // Added import for database interaction
+import { getDb } from '@/server/store';
+import { PublicKey } from '@solana/web3.js';
+import nacl from 'tweetnacl';
+import { decodeUTF8, decodeBase64 } from 'tweetnacl-util';
 
 const challenges = new Map<string, string>();
 
@@ -25,9 +28,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid challenge' }, { status: 400 });
     }
 
-    // Here you would verify the signature against the challenge using the public key
-    // For Solana, you'd use tweetnacl or similar library
-    // Simplified for demo - you should implement proper signature verification
+    try {
+      const publicKeyBytes = new PublicKey(publicKey).toBytes();
+      const signatureBytes = decodeBase64(signature);
+      const messageBytes = decodeUTF8(challenge);
+      
+      const isValid = nacl.sign.detached.verify(
+        messageBytes,
+        signatureBytes,
+        publicKeyBytes
+      );
+
+      if (!isValid) {
+        return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
+      }
+    } catch (err) {
+      console.error('Signature verification error:', err);
+      return NextResponse.json({ error: 'Signature verification failed' }, { status: 401 });
+    }
 
     const db = await getDb();
     const walletExists = await db.query('SELECT 1 FROM wallets WHERE public_key = $1', [publicKey]);
