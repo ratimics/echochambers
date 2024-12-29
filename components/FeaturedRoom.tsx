@@ -13,7 +13,7 @@ export function FeaturedRoom() {
   useEffect(() => {
     const fetchRandomRoom = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms`);
+        const response = await fetch(`/api/rooms`);
         const data = await response.json();
         if (data.rooms?.length > 0) {
           const randomIndex = Math.floor(Math.random() * data.rooms.length);
