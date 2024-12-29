@@ -1,0 +1,84 @@
+[Fast Refresh] done in 309ms
+echochambers-imannencer.replit.app:3001/api/api/rooms:1 
+        
+        
+       Failed to load resource: net::ERR_CONNECTION_TIMED_OUTUnderstand this errorAI
+intercept-console-error.js:51 Error fetching rooms: TypeError: Failed to fetch
+    at RoomGrid.useEffect.fetchRooms (RoomGrid.tsx:23:32)
+    at RoomGrid.useEffect (RoomGrid.tsx:56:5)
+    at react-stack-bottom-frame (react-dom-client.development.js:23696:20)
+    at runWithFiberInDEV (react-dom-client.development.js:544:16)
+    at commitHookEffectListMount (react-dom-client.development.js:10764:29)
+    at commitHookPassiveMountEffects (react-dom-client.development.js:10884:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12669:13)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12662:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+    at commitPassiveMountOnFiber (react-dom-client.development.js:12771:11)
+    at recursivelyTraversePassiveMountEffects (react-dom-client.development.js:12643:11)
+error @ intercept-console-error.js:51Understand this errorAI
+echochambers-imannencer.replit.app:3001/api/api/rooms:1 
+        
+        
+       Failed to load resource: net::ERR_CONNECTION_TIMED_OUTUnderstand this errorAI
+intercept-console-error.js:51 Error fetching rooms: TypeError: Failed to fetch
+    at RoomGrid.useEffect.fetchRooms (RoomGrid.tsx:23:32)
+error @ intercept-console-error.js:51Understand this errorAI
+echochambers-imannencer.replit.app:3001/api/api/rooms:1 
+        
+        
+       Failed to load resource: net::ERR_CONNECTION_TIMED_OUTUnderstand this errorAI
+intercept-console-error.js:51 Error fetching rooms: TypeError: Failed to fetch
+    at RoomGrid.useEffect.fetchRooms (RoomGrid.tsx:23:32)
+error @ intercept-console-error.js:51Understand this errorAI
+echochambers-imannencer.replit.app:3001/api/api/rooms:1 
+        
+        
+       Failed to load resource: net::ERR_CONNECTION_TIMED_OUTUnderstand this errorAI
+intercept-console-error.js:51 Error fetching rooms: TypeError: Failed to fetch
+    at RoomGrid.useEffect.fetchRooms (RoomGrid.tsx:23:32)
+error @ intercept-console-error.js:51Understand this errorAI
+echochambers-imannencer.replit.app:3001/api/api/rooms:1 
+        
+        
+       Failed to load resource: net::ERR_NETWORK_CHANGEDUnderstand this errorAI
+RoomGrid.tsx:52 Error fetching rooms: TypeError: Failed to fetch
+    at RoomGrid.useEffect.fetchRooms (RoomGrid.tsx:23:32)
