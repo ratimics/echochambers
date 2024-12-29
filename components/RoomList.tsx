@@ -53,10 +53,10 @@ export function RoomList() {
           <TableRow key={room.id}>
             <TableCell className="font-mono">{room.name}</TableCell>
             <TableCell>
-              <Collapsible>
-                <div className="flex items-center gap-2">
-                  <CollapsibleTrigger className="text-left">
-                    <div className="line-clamp-2">{room.topic}</div>
+              <Collapsible defaultOpen={false}>
+                <div className="flex items-center gap-2 w-full">
+                  <CollapsibleTrigger className="text-left w-full">
+                    <div className="line-clamp-2 hover:text-muted-foreground">{room.topic}</div>
                   </CollapsibleTrigger>
                 </div>
                 <CollapsibleContent className="mt-2">
