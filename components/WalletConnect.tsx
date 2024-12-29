@@ -44,8 +44,16 @@ export default function WalletConnect() {
     try {
       setIsLoading(true);
       if (!phantom) return;
-      const message = `Verify wallet ownership\nTimestamp: ${Date.now()}`;
-      const encodedMessage = new TextEncoder().encode(message);
+
+      // Get challenge
+      const challengeResponse = await fetch('/api/auth/verify', {
+        headers: {
+          'x-wallet-public-key': publicKey
+        }
+      });
+      const { challenge } = await challengeResponse.json();
+      
+      const encodedMessage = new TextEncoder().encode(challenge);
       const signedMessage = await phantom.signMessage(encodedMessage, "utf8");
       
       const response = await fetch('/api/auth/verify', {
