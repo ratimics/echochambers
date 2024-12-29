@@ -30,7 +30,7 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
             data.rooms.map(async (newRoom: ChatRoom) => {
               try {
                 const msgResponse = await fetch(
-                  `${process.env.NEXT_PUBLIC_API_URL || ''}/api/rooms/${newRoom.id}/messages`,
+                  `/api/rooms/${newRoom.id}/messages`,
                 );
                 if (!msgResponse.ok) {
                   return { ...newRoom, messages: [] };
