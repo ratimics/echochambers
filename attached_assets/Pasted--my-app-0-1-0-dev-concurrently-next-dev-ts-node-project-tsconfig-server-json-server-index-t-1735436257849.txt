@@ -1,0 +1,37 @@
+
+> my-app@0.1.0 dev
+> concurrently "next dev" "ts-node --project tsconfig.server.json server/index.ts --port=3001"
+
+[0]    ▲ Next.js 15.1.3
+[0]    - Local:        http://localhost:3000
+[0]    - Network:      http://172.31.196.76:3000
+[0]    - Environments: .env
+[0] 
+[0]  ✓ Starting...
+[1] /home/runner/echochambers/node_modules/ts-node/src/index.ts:859
+[1]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[1]            ^
+[1] TSError: ⨯ Unable to compile TypeScript:
+[1] server/index.ts(4,10): error TS2305: Module '"./db"' has no exported member 'initializeDatabase'.
+[1] server/index.ts(20,16): error TS2769: No overload matches this call.
+[1]   Overload 1 of 6, '(port: number, hostname: string, backlog: number, callback?: (() => void) | undefined): Server<typeof IncomingMessage, typeof ServerResponse>', gave the following error.
+[1]     Argument of type 'string | 3001' is not assignable to parameter of type 'number'.
+[1]       Type 'string' is not assignable to type 'number'.
+[1]   Overload 2 of 6, '(port: number, hostname: string, callback?: (() => void) | undefined): Server<typeof IncomingMessage, typeof ServerResponse>', gave the following error.
+[1]     Argument of type 'string | 3001' is not assignable to parameter of type 'number'.
+[1]       Type 'string' is not assignable to type 'number'.
+[1] 
+[1]     at createTSError (/home/runner/echochambers/node_modules/ts-node/src/index.ts:859:12)
+[1]     at reportTSError (/home/runner/echochambers/node_modules/ts-node/src/index.ts:863:19)
+[1]     at getOutput (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1077:36)
+[1]     at Object.compile (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1433:41)
+[1]     at Module.m._compile (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1617:30)
+[1]     at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+[1]     at Object.require.extensions.<computed> [as .ts] (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1621:12)
+[1]     at Module.load (node:internal/modules/cjs/loader:1288:32)
+[1]     at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+[1]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:173:12) {
+[1]   diagnosticCodes: [ 2305, 2769 ]
+[1] }
+[1] ts-node --project tsconfig.server.json server/index.ts --port=3001 exited with code 1
+[0]  ✓ Ready in 1535ms
