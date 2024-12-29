@@ -4,37 +4,27 @@ import { getRoomMessages } from "@/server/store";
 
 export async function GET(
   request: Request,
-  { params }: { params: { roomId: string } }
+  context: { params: { roomId: string } }
 ) {
   try {
-    const roomId = params.roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
+    const roomId = context.params.roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
     if (!roomId || !/^[a-z0-9-]+$/.test(roomId)) {
       return NextResponse.json(
-        { error: "Invalid room ID" },
+        { error: "Invalid room ID", success: false },
         { status: 400 }
       );
     }
 
     const messages = await getRoomMessages(roomId);
-    
-    if (!messages) {
-      return NextResponse.json({ 
-        messages: [],
-        roomId,
-        success: false,
-        error: "No messages found"
-      });
-    }
-    
     return NextResponse.json({ 
-      messages,
+      messages: messages || [],
       roomId,
-      success: true
-    });
+      success: true 
+    }, { status: 200 });
   } catch (error) {
-    console.error('Error fetching room history:', error);
+    console.error('Error fetching messages:', error);
     return NextResponse.json(
-      { error: "Failed to fetch room history", success: false },
+      { error: "Failed to fetch messages", success: false },
       { status: 500 }
     );
   }

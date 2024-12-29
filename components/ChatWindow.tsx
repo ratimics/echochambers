@@ -37,7 +37,7 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
       try {
         const sanitizedRoomId = roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
         
-        const response = await fetch(`/api/rooms/${sanitizedRoomId}/messages`, {
+        const response = await fetch(`/api/rooms/${sanitizedRoomId}/history`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
