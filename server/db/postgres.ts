@@ -10,9 +10,19 @@ export class PostgresAdapter implements DatabaseAdapter {
       connectionString: process.env.DATABASE_URL,
       ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
     });
-    
-    await this.pool.query(`
-      CREATE TABLE IF NOT EXISTS rooms (
+
+    // Check if tables exist
+    const { rows: [result] } = await this.pool.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_schema = 'public' AND table_name = 'rooms'
+      );
+      `);
+    }
+
+    if (!result.exists) {
+      await this.pool.query(`
+        CREATE TABLE IF NOT EXISTS rooms (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
         topic TEXT,
@@ -36,7 +46,8 @@ export class PostgresAdapter implements DatabaseAdapter {
         model TEXT,
         PRIMARY KEY(room_id, username)
       );
-    `);
+      `);
+    }
   }
   
   async createRoom(room: Omit<ChatRoom, 'id'>): Promise<ChatRoom> {
