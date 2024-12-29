@@ -1,0 +1,356 @@
+  - Environments: .env.local, .env
+[0] 
+[0]  ✓ Starting...
+[1] /home/runner/echochambers/node_modules/ts-node/src/index.ts:859
+[1]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[1]            ^
+[1] TSError: ⨯ Unable to compile TypeScript:
+[1] server/index.ts(19,14): error TS2769: No overload matches this call.
+[1]   Overload 1 of 6, '(port: number, hostname: string, backlog: number, callback?: (() => void) | undefined): Server<typeof IncomingMessage, typeof ServerResponse>', gave the following error.
+[1]     Argument of type 'string | 3001' is not assignable to parameter of type 'number'.
+[1]       Type 'string' is not assignable to type 'number'.
+[1]   Overload 2 of 6, '(port: number, hostname: string, callback?: (() => void) | undefined): Server<typeof IncomingMessage, typeof ServerResponse>', gave the following error.
+[1]     Argument of type 'string | 3001' is not assignable to parameter of type 'number'.
+[1]       Type 'string' is not assignable to type 'number'.
+[1] 
+[1]     at createTSError (/home/runner/echochambers/node_modules/ts-node/src/index.ts:859:12)
+[1]     at reportTSError (/home/runner/echochambers/node_modules/ts-node/src/index.ts:863:19)
+[1]     at getOutput (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1077:36)
+[1]     at Object.compile (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1433:41)
+[1]     at Module.m._compile (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1617:30)
+[1]     at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+[1]     at Object.require.extensions.<computed> [as .ts] (/home/runner/echochambers/node_modules/ts-node/src/index.ts:1621:12)
+[1]     at Module.load (node:internal/modules/cjs/loader:1288:32)
+[1]     at Function.Module._load (node:internal/modules/cjs/loader:1104:12)
+[1]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:173:12) {
+[1]   diagnosticCodes: [ 2769 ]
+[1] }
+[1] ts-node --project tsconfig.server.json server/index.ts --port=3001 exited with code 1
+[0]  ✓ Ready in 2.5s
+[0]  ✓ Compiled /middleware in 156ms
+[0]  ○ Compiling / ...
+[0]  ✓ Compiled / in 6s (692 modules)
+[0]  ✓ Compiled in 705ms (321 modules)
+[0]  GET / 200 in 6677ms
+[0]  ✓ Compiled /api/rooms in 415ms (687 modules)
+[0]  GET /api/rooms 200 in 1061ms
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/naberius/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-the-lovers/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/bathin/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/ipos/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/sabnock/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/decan-mars-in-scorpio/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-seven-of-pentacles/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-eight-of-cups/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-eight-of-wands/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-eight-of-pentacles/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/bael/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/furcas/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0]  ○ Compiling /_error ...
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/asmoday/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-two-of-swords/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/astaroth/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/barbatos/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/forneus/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/decan-air-of-fire/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/tarot-king-of-cups/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Failed to proxy http://0.0.0.0:3001/api/rooms/rank-prince/history Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
+[0] }
+[0] Error: connect ECONNREFUSED 0.0.0.0:3001
+[0]     at <unknown> (Error: connect ECONNREFUSED 0.0.0.0:3001) {
+[0]   errno: -111,
+[0]   code: 'ECONNREFUSED',
+[0]   syscall: 'connect',
+[0]   address: '0.0.0.0',
+[0]   port: 3001
