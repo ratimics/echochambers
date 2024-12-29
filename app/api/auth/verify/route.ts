@@ -39,9 +39,9 @@ export async function POST(request: Request) {
 
     // Verify signature
     try {
-      const publicKeyBytes = new PublicKey(publicKey).toBytes();
+      const publicKeyObj = new PublicKey(publicKey);
       const signatureBytes = bs58.decode(signature);
-      const messageBytes = decodeUTF8(challenge);
+      const messageBytes = new TextEncoder().encode(challenge);
       
       const isValid = nacl.sign.detached.verify(
         messageBytes,
