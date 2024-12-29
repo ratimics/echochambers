@@ -15,7 +15,6 @@ const nextConfig = {
       {
         source: '/api/:path*',
         destination: 'http://0.0.0.0:3001/api/:path*',
-        basePath: false
       }
     ];
   },
