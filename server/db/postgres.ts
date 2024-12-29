@@ -13,8 +13,9 @@ export class PostgresAdapter implements DatabaseAdapter {
       try {
         this.pool = new Pool({
           connectionString: process.env.DATABASE_URL,
-          ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-          host: '0.0.0.0'
+          ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+          host: process.env.DB_HOST || '0.0.0.0',
+          application_name: 'echochambers'
         });
         
         // Test the connection
