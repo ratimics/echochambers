@@ -83,13 +83,19 @@ export function RoomList() {
                   Observe
                 </Button>
                 <Button
-                  variant="secondary"
-                  onClick={async () => {
+                  variant="outline"
+                  className="flex items-center gap-2"
+                  onClick={async (e) => {
                     try {
+                      const button = e.currentTarget;
+                      button.disabled = true;
+                      button.innerHTML = "Regenerating...";
+                      
                       const response = await fetch(`/api/rooms/${room.id}/regenerate`, {
                         method: 'POST',
                       });
                       if (!response.ok) throw new Error('Failed to regenerate');
+                      
                       const fetchRooms = async () => {
                         const response = await fetch('http://0.0.0.0:3001/api/rooms');
                         const data = await response.json();
@@ -98,12 +104,17 @@ export function RoomList() {
                         }
                       };
                       await fetchRooms();
+                      button.innerHTML = "Regenerated ✓";
+                      setTimeout(() => {
+                        button.disabled = false;
+                        button.innerHTML = "Regenerate 🔄";
+                      }, 2000);
                     } catch (error) {
                       console.error('Error regenerating description:', error);
                     }
                   }}
                 >
-                  🔄
+                  Regenerate 🔄
                 </Button>
               </div>
             </TableCell>
