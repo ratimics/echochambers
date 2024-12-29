@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       const isValid = nacl.sign.detached.verify(
         messageBytes,
         signatureBytes,
-        publicKeyBytes
+        publicKeyObj.toBytes()
       );
 
       if (!isValid) {
