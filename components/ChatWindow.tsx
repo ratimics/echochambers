@@ -30,6 +30,9 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+    
     const fetchMessages = async () => {
       try {
         const sanitizedRoomId = roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
@@ -39,30 +42,43 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
           headers: {
             'Content-Type': 'application/json',
           },
+          signal: controller.signal
         });
         
-        const data = await response.json();
-        
         if (!response.ok) {
-          throw new Error(`Failed to fetch messages (${response.status})`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
+        const data = await response.json();
         
         if (!data.success) {
           throw new Error(data.error || 'Failed to fetch messages');
         }
         
-        setMessages(data.messages || []);
-        setError(null);
+        if (isMounted) {
+          setMessages(data.messages || []);
+          setError(null);
+        }
       } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') {
+          return;
+        }
         const errorMessage = err instanceof Error ? err.message : 'Failed to fetch messages';
         console.error('Error fetching messages:', errorMessage);
-        setError(errorMessage);
+        if (isMounted) {
+          setError(errorMessage);
+        }
       }
     };
     
     fetchMessages();
     const interval = setInterval(fetchMessages, 2000);
-    return () => clearInterval(interval);
+    
+    return () => {
+      isMounted = false;
+      controller.abort();
+      clearInterval(interval);
+    };
   }, [roomId]);
 
   if (!mounted) {
