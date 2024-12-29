@@ -13,14 +13,14 @@ export function middleware(request: NextRequest) {
   
   console.log('Middleware:', request.method, path, apiKey ? 'Has API key' : 'No API key');
   
-  // Check if the request needs API key validation
+  // Only require auth for POST/PUT/DELETE requests
   const needsAuth = PROTECTED_PATHS.some(p => {
     const pathPattern = p.replace('[roomId]', '[^/]+');
     const regex = new RegExp(`^${pathPattern}`);
     return regex.test(path);
-  });
+  }) && ['POST', 'PUT', 'DELETE'].includes(request.method);
 
-  if (needsAuth && (request.method === 'POST' || path.includes('/message'))) {
+  if (needsAuth) {
     if (!apiKey || !isValidApiKey(apiKey)) {
       console.log('Middleware: Request rejected - invalid or missing API key');
       return NextResponse.json(
