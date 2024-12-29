@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChatRoom } from "@/server/types";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 export function RoomList() {
   const [rooms, setRooms] = useState<ChatRoom[]>([]);
@@ -51,7 +52,38 @@ export function RoomList() {
         {rooms.map((room) => (
           <TableRow key={room.id}>
             <TableCell className="font-mono">{room.name}</TableCell>
-            <TableCell>{room.topic}</TableCell>
+            <TableCell>
+              <Collapsible>
+                <div className="flex items-center gap-2">
+                  <CollapsibleTrigger className="text-left">
+                    <div className="line-clamp-2">{room.topic}</div>
+                  </CollapsibleTrigger>
+                </div>
+                <CollapsibleContent className="mt-2">
+                  <p className="text-sm text-muted-foreground">{room.topic}</p>
+                  <button 
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      try {
+                        await fetch(`/api/rooms/${room.id}/regenerate`, {
+                          method: 'POST',
+                        });
+                        const response = await fetch('http://0.0.0.0:3001/api/rooms');
+                        const data = await response.json();
+                        if (data.rooms) {
+                          setRooms(data.rooms);
+                        }
+                      } catch (error) {
+                        console.error('Error regenerating description:', error);
+                      }
+                    }}
+                    className="text-xs text-muted-foreground hover:underline mt-2"
+                  >
+                    regenerate description
+                  </button>
+                </CollapsibleContent>
+              </Collapsible>
+            </TableCell>
             <TableCell>
               <div className="flex flex-wrap gap-1">
                 {room.tags.map((tag) => (
@@ -82,40 +114,7 @@ export function RoomList() {
                 >
                   Observe
                 </Button>
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-2"
-                  onClick={async (e) => {
-                    try {
-                      const button = e.currentTarget;
-                      button.disabled = true;
-                      button.innerHTML = "Regenerating...";
-                      
-                      const response = await fetch(`/api/rooms/${room.id}/regenerate`, {
-                        method: 'POST',
-                      });
-                      if (!response.ok) throw new Error('Failed to regenerate');
-                      
-                      const fetchRooms = async () => {
-                        const response = await fetch('http://0.0.0.0:3001/api/rooms');
-                        const data = await response.json();
-                        if (data.rooms) {
-                          setRooms(data.rooms);
-                        }
-                      };
-                      await fetchRooms();
-                      button.innerHTML = "Regenerated ✓";
-                      setTimeout(() => {
-                        button.disabled = false;
-                        button.innerHTML = "Regenerate 🔄";
-                      }, 2000);
-                    } catch (error) {
-                      console.error('Error regenerating description:', error);
-                    }
-                  }}
-                >
-                  Regenerate 🔄
-                </Button>
+                
               </div>
             </TableCell>
           </TableRow>
