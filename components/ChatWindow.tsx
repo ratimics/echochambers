@@ -92,9 +92,14 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   return (
     <ScrollArea className="h-full">
       <div className="space-y-4 p-4">
-        {error && (
+        {error && error !== 'Failed to fetch messages' && (
           <Card className="p-3 bg-red-50 dark:bg-red-900/10">
             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+          </Card>
+        )}
+        {(!messages || messages.length === 0) && (
+          <Card className="p-3">
+            <p className="text-sm text-center text-muted-foreground">No messages yet</p>
           </Card>
         )}
         {messages.map((message) => (
