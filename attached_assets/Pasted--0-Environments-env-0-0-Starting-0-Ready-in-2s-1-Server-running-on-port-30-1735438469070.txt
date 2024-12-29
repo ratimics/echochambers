@@ -1,0 +1,126 @@
+[0]    - Environments: .env
+[0] 
+[0]  ✓ Starting...
+[0]  ✓ Ready in 2s
+[1] Server running on port 3001
+[0]  ○ Compiling / ...
+[0]  ✓ Compiled / in 8.1s (696 modules)
+[0]  ✓ Compiled in 585ms (673 modules)
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 8858ms
+[0]  GET /_next/static/chunks/app/page.js 404 in 8856ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 8858ms
+[0]  ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:42) {
+[0]   digest: '171535713'
+[0] }
+[0]  ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:42) {
+[0]   digest: '171535713'
+[0] }
+[0]  GET / 500 in 12599ms
+[0]  ○ Compiling /_error ...
+[0]  ✓ Compiled /_error in 3.4s (919 modules)
+[0]  GET /_next/static/css/app/layout.css?v=1735438439365 404 in 3774ms
+[0]  GET /_next/static/chunks/webpack.js 404 in 3771ms
+[0]  GET /_next/static/chunks/main-app.js 404 in 3770ms
+[0]  ⨯ Error: Cannot find module './638.js'
+[0] Require stack:
+[0] - /home/runner/echochambers/.next/server/webpack-runtime.js
+[0] - /home/runner/echochambers/.next/server/pages/_document.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/require.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/load-components.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/utils.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/options.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/index.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/parse-module.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/get-page-static-info.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-server.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/start-server.js
+[0]     at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+[0]     at <unknown> (.next/server/webpack-runtime.js:111:40)
+[0]     at Array.reduce (<anonymous>)
+[0]     at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+[0]     at Array.map (<anonymous>)
+[0]     at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+[0]     at <unknown> (.next/server/app/_not-found/page.js:1:4154)
+[0]     at Object.<anonymous> (.next/server/app/_not-found/page.js:1:4199) {
+[0]   code: 'MODULE_NOT_FOUND',
+[0]   requireStack: [Array]
+[0] }
+[0]  ⨯ Error: Cannot find module './638.js'
+[0] Require stack:
+[0] - /home/runner/echochambers/.next/server/webpack-runtime.js
+[0] - /home/runner/echochambers/.next/server/pages/_document.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/require.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/load-components.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/utils.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/options.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/index.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/parse-module.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/get-page-static-info.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-server.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/start-server.js
+[0]     at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+[0]     at <unknown> (.next/server/webpack-runtime.js:111:40)
+[0]     at Array.reduce (<anonymous>)
+[0]     at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+[0]     at Array.map (<anonymous>)
+[0]     at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+[0]     at <unknown> (.next/server/app/_not-found/page.js:1:4154)
+[0]     at Object.<anonymous> (.next/server/app/_not-found/page.js:1:4199) {
+[0]   code: 'MODULE_NOT_FOUND',
+[0]   requireStack: [Array]
+[0] }
+[0]  ⨯ Error: Cannot find module './638.js'
+[0] Require stack:
+[0] - /home/runner/echochambers/.next/server/webpack-runtime.js
+[0] - /home/runner/echochambers/.next/server/pages/_document.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/require.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/load-components.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/utils.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/options.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/index.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/parse-module.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/get-page-static-info.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-server.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/start-server.js
+[0]     at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+[0]     at <unknown> (.next/server/webpack-runtime.js:111:40)
+[0]     at Array.reduce (<anonymous>)
+[0]     at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+[0]     at Array.map (<anonymous>)
+[0]     at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+[0]     at <unknown> (.next/server/app/_not-found/page.js:1:4154)
+[0]     at Object.<anonymous> (.next/server/app/_not-found/page.js:1:4199) {
+[0]   code: 'MODULE_NOT_FOUND',
+[0]   requireStack: [Array]
+[0] }
+[0]  ⨯ Error: Cannot find module './638.js'
+[0] Require stack:
+[0] - /home/runner/echochambers/.next/server/webpack-runtime.js
+[0] - /home/runner/echochambers/.next/server/pages/_document.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/require.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/load-components.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/utils.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/options.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/swc/index.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/parse-module.js
+[0] - /home/runner/echochambers/node_modules/next/dist/build/analysis/get-page-static-info.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/router-server.js
+[0] - /home/runner/echochambers/node_modules/next/dist/server/lib/start-server.js
+[0]     at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+[0]     at <unknown> (.next/server/webpack-runtime.js:111:40)
+[0]     at Array.reduce (<anonymous>)
+[0]     at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+[0]     at Array.map (<anonymous>)
+[0]     at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+[0]     at <unknown> (.next/server/app/page.js:95:1702)
+[0]     at Object.<anonymous> (.next/server/app/page.js:95:1751) {
+[0]   code: 'MODULE_NOT_FOUND',
+[0]   requireStack: [Array],
+[0]   page: '/'
+[0] }
