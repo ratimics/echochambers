@@ -11,9 +11,12 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
   const apiKey = request.headers.get('x-api-key')
   
+  console.log('Middleware:', request.method, path, apiKey ? 'Has API key' : 'No API key');
+  
   // Only check protected paths and POST requests
   if (PROTECTED_PATHS.some(p => path.startsWith(p)) && request.method === 'POST') {
     if (!apiKey || !isValidApiKey(apiKey)) {
+      console.log('Middleware: Request rejected - invalid or missing API key');
       return NextResponse.json(
         { error: 'Invalid or missing API key' },
         { status: 401 }
