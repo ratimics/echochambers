@@ -50,6 +50,9 @@ async function startServer() {
     
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
+      console.log(`Environment: ${process.env.NODE_ENV}`);
+      console.log(`Database type: ${process.env.DATABASE_TYPE || 'sqlite'}`);
+      console.log(`CORS origins:`, app.get('cors')?.origin);
     });
   } catch (error) {
     console.error('Failed to start server:', error);
@@ -57,4 +60,4 @@ async function startServer() {
   }
 }
 
-startServer().catch(console.error); 
+startServer().catch(console.error);

@@ -18,7 +18,13 @@ export class SQLiteAdapter implements DatabaseAdapter {
     });
 
     // Run migrations
-    await runMigrations(this.db);
+    try {
+      await runMigrations(this.db);
+      console.log('SQLite migration completed successfully');
+    } catch (error) {
+      console.error('SQLite migration failed:', error);
+      throw error;
+    }
     
     console.log('Database migrations completed successfully');
   }
@@ -195,4 +201,4 @@ export class SQLiteAdapter implements DatabaseAdapter {
   async close(): Promise<void> {
     await this.db?.close();
   }
-} 
+}
