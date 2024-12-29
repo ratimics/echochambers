@@ -11,8 +11,6 @@ export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
   const apiKey = request.headers.get('x-api-key')
   
-  console.log('Middleware:', request.method, path, apiKey ? 'Has API key' : 'No API key');
-  
   // Only require auth for POST/PUT/DELETE requests
   const needsAuth = PROTECTED_PATHS.some(p => {
     const pathPattern = p.replace('[roomId]', '[^/]+');
@@ -21,6 +19,8 @@ export function middleware(request: NextRequest) {
   }) && ['POST', 'PUT', 'DELETE'].includes(request.method);
 
   if (needsAuth) {
+
+    console.log('Middleware:', request.method, path, apiKey ? 'Has API key' : 'No API key');
     if (!apiKey || !isValidApiKey(apiKey)) {
       console.log('Middleware: Request rejected - invalid or missing API key');
       return NextResponse.json(
