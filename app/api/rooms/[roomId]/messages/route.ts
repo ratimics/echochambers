@@ -15,7 +15,22 @@ export async function GET(
       );
     }
 
-    const messages = await getRoomMessages(roomId);
+    try {
+      const messages = await getRoomMessages(roomId);
+      return NextResponse.json({ 
+        messages: messages || [],
+        roomId,
+        success: true 
+      });
+    } catch (error) {
+      console.error('Error fetching room messages:', error);
+      return NextResponse.json({ 
+        messages: [],
+        roomId,
+        success: false,
+        error: "No messages found"
+      });
+    }
     return NextResponse.json({ 
       messages: messages || [],
       roomId,
