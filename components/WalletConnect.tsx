@@ -35,10 +35,29 @@ export default function WalletConnect() {
       const message = `Verify wallet ownership\nTimestamp: ${Date.now()}`;
       const encodedMessage = new TextEncoder().encode(message);
       const signedMessage = await phantom.signMessage(encodedMessage, "utf8");
-      console.log("Signature:", signedMessage);
-      // Here you can send the signature to your API for verification
+      
+      const response = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          publicKey,
+          signature: signedMessage.toString(),
+          message
+        })
+      });
+
+      if (response.ok) {
+        const { apiKey } = await response.json();
+        localStorage.setItem('apiKey', apiKey);
+        alert(`Your API key: ${apiKey}`);
+      } else {
+        throw new Error('Failed to verify signature');
+      }
     } catch (err) {
       console.error(err);
+      alert('Failed to generate API key');
     }
   };
 
