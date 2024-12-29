@@ -11,10 +11,16 @@ export class PostgresAdapter implements DatabaseAdapter {
     
     while (retries < maxRetries) {
       try {
+        console.log('Initializing Postgres connection with:', {
+          connectionString: process.env.DATABASE_URL,
+          host: process.env.DB_HOST || '0.0.0.0'
+        });
+        
         this.pool = new Pool({
           connectionString: process.env.DATABASE_URL,
-          ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
+          ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
           host: process.env.DB_HOST || '0.0.0.0',
+          port: parseInt(process.env.DB_PORT || '5432'),
           application_name: 'echochambers'
         });
         
