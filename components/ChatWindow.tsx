@@ -32,9 +32,7 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const sanitizedRoomId = encodeURIComponent(
-          roomId.toLowerCase().replace("#", "")
-        );
+        const sanitizedRoomId = roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
         
         const response = await fetch(`/api/rooms/${sanitizedRoomId}/history`, {
           method: 'GET',

@@ -7,8 +7,8 @@ export async function GET(
   { params }: { params: { roomId: string } }
 ) {
   try {
-    const roomId = params.roomId.toLowerCase().replace("#", "");
-    if (!roomId) {
+    const roomId = params.roomId.toLowerCase().replace(/[^a-z0-9-]/g, "");
+    if (!roomId || !/^[a-z0-9-]+$/.test(roomId)) {
       return NextResponse.json(
         { error: "Invalid room ID" },
         { status: 400 }
