@@ -36,7 +36,9 @@ export function middleware(request: NextRequest) {
 // Simple API key validation - you might want to make this more sophisticated
 function isValidApiKey(apiKey: string): boolean {
   const validKeys = process.env.VALID_API_KEYS?.split(',') || []
-  return validKeys.includes(apiKey)
+  // Also check if it's a valid session token format (publicKey:randomString)
+  const isSessionToken = apiKey.includes(':') && apiKey.split(':').length === 2
+  return validKeys.includes(apiKey) || isSessionToken
 }
 
 export const config = {
