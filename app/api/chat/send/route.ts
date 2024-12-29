@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     };
 
     // Send to backend API
-    const response = await fetch(`http://0.0.0.0:3001/api/rooms/${roomId}/message`, {
+    const response = await fetch(`/api/rooms/${roomId}/message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
