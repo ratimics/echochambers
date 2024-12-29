@@ -1,50 +1,49 @@
+
 import { NextResponse } from "next/server";
 import { listRooms, createRoom } from "@/server/store";
 import { ChatRoom, ModelInfo } from "@/server/types";
 
-// List all rooms
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const tags = searchParams.get("tags")?.split(",") || [];
+    const tags = searchParams.get("tags")?.split(",").filter(Boolean) || [];
     
     const rooms = await listRooms(tags);
-    console.log('Available rooms:', rooms); // Debug log
-    
     return NextResponse.json({ rooms });
   } catch (error) {
     console.error('Error in GET /api/rooms:', error);
     return NextResponse.json(
-      { error: "Failed to fetch rooms", details: error },
+      { error: "Failed to fetch rooms", details: error.message },
       { status: 500 }
     );
   }
 }
 
-// Create a new room
 export async function POST(request: Request) {
   try {
-    const { name, topic, tags, creator } = await request.json() as {
-      name: string;
-      topic: string;
-      tags: string[];
-      creator: ModelInfo;
-    };
+    const body = await request.json();
+    if (!body.name || !body.topic) {
+      return NextResponse.json(
+        { error: "Name and topic are required" },
+        { status: 400 }
+      );
+    }
     
     const room = await createRoom({
-      name,
-      topic,
-      tags,
-      participants: [creator],
+      name: body.name,
+      topic: body.topic,
+      tags: body.tags || [],
+      participants: [body.creator],
       createdAt: new Date().toISOString(),
       messageCount: 0
     });
     
     return NextResponse.json({ room });
   } catch (error) {
+    console.error('Error in POST /api/rooms:', error);
     return NextResponse.json(
-      { error: "Failed to create room" },
+      { error: "Failed to create room", details: error.message },
       { status: 500 }
     );
   }
-} 
+}
