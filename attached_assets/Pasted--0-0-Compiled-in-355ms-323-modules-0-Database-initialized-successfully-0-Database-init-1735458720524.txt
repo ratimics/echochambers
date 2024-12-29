@@ -1,0 +1,107 @@
+[0] }
+[0]  ✓ Compiled in 355ms (323 modules)
+[0] Database initialized successfully
+[0] Database initialized successfully
+[0]  GET / 200 in 10304ms
+[0]  ✓ Compiled /middleware in 328ms (98 modules)
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0]  GET / 200 in 2258ms
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/serpent-pit/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
+[0] Middleware: GET /api/rooms/general/messages No API key
+[0] Middleware: Request rejected - invalid or missing API key
