@@ -20,7 +20,7 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch("/api/rooms");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/rooms`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -30,7 +30,7 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
             data.rooms.map(async (newRoom: ChatRoom) => {
               try {
                 const msgResponse = await fetch(
-                  `/api/rooms/${newRoom.id}/messages`,
+                  `${process.env.NEXT_PUBLIC_API_URL || ''}/api/rooms/${newRoom.id}/messages`,
                 );
                 if (!msgResponse.ok) {
                   return { ...newRoom, messages: [] };
