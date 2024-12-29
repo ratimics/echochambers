@@ -3,6 +3,19 @@ import { ChatRoom, ChatMessage, ModelInfo } from './types';
 
 let db: DatabaseAdapter | null = null;
 
+async function getDb(): Promise<DatabaseAdapter> {
+  if (!db) {
+    try {
+      db = await createAdapter();
+      console.log('Database initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize database:', error);
+      throw error;
+    }
+  }
+  return db;
+}
+
 // Default rooms configuration
 const DEFAULT_ROOMS: Omit<ChatRoom, 'id'>[] = [
   {
