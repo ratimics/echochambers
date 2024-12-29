@@ -96,11 +96,22 @@ export async function listRooms(tags?: string[]): Promise<ChatRoom[]> {
 }
 
 export async function addMessageToRoom(roomId: string, message: Omit<ChatMessage, 'id'>): Promise<ChatMessage> {
-  const database = await getDb();
-  console.log('Store: Adding message to room:', roomId, message);
-  const saved = await database.addMessage(message);
-  console.log('Store: Message saved:', saved);
-  return saved;
+  try {
+    const database = await getDb();
+    if (!database) {
+      throw new Error('Database connection failed');
+    }
+    console.log('Store: Adding message to room:', roomId, message);
+    const saved = await database.addMessage(message);
+    if (!saved) {
+      throw new Error('Message save operation failed');
+    }
+    console.log('Store: Message saved:', saved);
+    return saved;
+  } catch (error) {
+    console.error('Store: Error adding message:', error);
+    throw error;
+  }
 }
 
 export async function addParticipant(roomId: string, participant: ModelInfo): Promise<void> {

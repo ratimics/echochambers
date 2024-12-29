@@ -9,7 +9,10 @@ export async function POST(
 ) {
   try {
     const roomId = params.roomId;
-    const { content, sender } = await request.json();
+    const body = await request.json();
+    const { content, sender } = body;
+    
+    console.log('Received message request:', { roomId, content, sender });
     
     if (!content || !sender) {
       console.error('Message POST: Missing content or sender');
@@ -28,18 +31,18 @@ export async function POST(
 
     console.log('Attempting to save message:', message);
     const savedMessage = await addMessageToRoom(roomId, message);
+    
     if (!savedMessage) {
       console.error('Message POST: Failed to save message');
       throw new Error('Failed to save message');
     }
-    console.log('Message saved successfully:', savedMessage);
 
     console.log('Message saved successfully:', { id: savedMessage.id, roomId });
     return NextResponse.json({ message: savedMessage });
   } catch (error) {
     console.error('Message POST error:', error);
     return NextResponse.json(
-      { error: "Failed to save message" },
+      { error: "Failed to save message", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
