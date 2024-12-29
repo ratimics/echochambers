@@ -20,20 +20,34 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
     const fetchRooms = async () => {
       try {
         const response = await fetch('/api/rooms');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         if (data.rooms) {
-          setRooms(prevRooms => 
-            data.rooms.map((newRoom: ChatRoom) => ({
-              ...newRoom,
-              messages: prevRooms.find(r => r.id === newRoom.id)?.messages || []
-            }))
+          const roomsWithMessages = await Promise.all(
+            data.rooms.map(async (newRoom: ChatRoom) => {
+              try {
+                const msgResponse = await fetch(`/api/rooms/${newRoom.id}/history`);
+                if (!msgResponse.ok) {
+                  return { ...newRoom, messages: [] };
+                }
+                const msgData = await msgResponse.json();
+                return { ...newRoom, messages: msgData.messages || [] };
+              } catch (error) {
+                console.error(`Error fetching messages for room ${newRoom.id}:`, error);
+                return { ...newRoom, messages: [] };
+              }
+            })
           );
+          setRooms(roomsWithMessages);
         }
       } catch (error) {
         console.error('Error fetching rooms:', error);
       }
     };
 
+    fetchRooms();
     const interval = setInterval(fetchRooms, 5000);
     return () => clearInterval(interval);
   }, []);
