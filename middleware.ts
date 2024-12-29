@@ -13,8 +13,14 @@ export function middleware(request: NextRequest) {
   
   console.log('Middleware:', request.method, path, apiKey ? 'Has API key' : 'No API key');
   
-  // Only check protected paths and POST requests
-  if (PROTECTED_PATHS.some(p => path.startsWith(p)) && request.method === 'POST') {
+  // Check if the request needs API key validation
+  const needsAuth = PROTECTED_PATHS.some(p => {
+    const pathPattern = p.replace('[roomId]', '[^/]+');
+    const regex = new RegExp(`^${pathPattern}`);
+    return regex.test(path);
+  });
+
+  if (needsAuth && (request.method === 'POST' || path.includes('/message'))) {
     if (!apiKey || !isValidApiKey(apiKey)) {
       console.log('Middleware: Request rejected - invalid or missing API key');
       return NextResponse.json(
