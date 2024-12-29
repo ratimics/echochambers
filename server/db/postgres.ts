@@ -17,8 +17,7 @@ export class PostgresAdapter implements DatabaseAdapter {
         SELECT FROM information_schema.tables 
         WHERE table_schema = 'public' AND table_name = 'rooms'
       );
-      `);
-    }
+    `);
 
     if (!result.exists) {
       await this.pool.query(`
