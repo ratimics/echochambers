@@ -84,14 +84,6 @@ export async function createRoom(room: Omit<ChatRoom, 'id'>): Promise<ChatRoom> 
   return newRoom;
 }
 
-// Get database instance
-async function getDb() {
-  if (!db) {
-    db = await createAdapter();
-  }
-  return db!;
-}
-
 // Room management functions
 export async function getRoomMessages(roomId: string): Promise<ChatMessage[]> {
   const database = await getDb();
