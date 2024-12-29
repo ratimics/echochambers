@@ -4,11 +4,12 @@ import crypto from 'crypto';
 import { PublicKey } from '@solana/web3.js';
 import nacl from 'tweetnacl';
 import { decodeUTF8 } from 'tweetnacl-util';
+import bs58 from 'bs58';
 
 const challenges = new Map<string, string>();
 const ALLOWED_WALLETS = [
   // Add your allowed wallet public keys here
-  'YOUR_WALLET_PUBLIC_KEY'
+  '*' // Allow all wallets for testing
 ];
 
 export async function GET(request: Request) {

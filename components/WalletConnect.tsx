@@ -63,7 +63,7 @@ export default function WalletConnect() {
         },
         body: JSON.stringify({
           publicKey,
-          signature: signedMessage.toString(),
+          signature: bs58.encode(signedMessage),
           challenge
         })
       });
