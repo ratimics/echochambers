@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const sessionToken = `${publicKey}:${randomString}`;
 
     return NextResponse.json({ 
-      sessionToken,
+      apiKey: sessionToken,
       expiresAt: null // Token never expires
     });
   } catch (error) {

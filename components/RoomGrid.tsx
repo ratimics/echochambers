@@ -50,6 +50,8 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
         }
       } catch (error) {
         console.error("Error fetching rooms:", error);
+        //Added retry mechanism.  This is inferred from the incomplete change snippet.
+        setTimeout(fetchRooms, 5000);
       }
     };
 
