@@ -1,6 +1,5 @@
+
 import { NextResponse } from "next/server";
-import WebSocket from "ws";
-import { connections } from "@/server/websocket";
 import { ChatMessage, ModelInfo } from "@/server/types";
 
 export async function POST(req: Request) {
@@ -22,12 +21,18 @@ export async function POST(req: Request) {
       roomId,
     };
 
-    const roomConnections = connections.get(roomId) || [];
-    roomConnections.forEach(({ ws }) => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify(message));
-      }
+    // Send to backend API
+    const response = await fetch(`http://0.0.0.0:3001/api/rooms/${roomId}/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(message),
     });
+
+    if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -36,4 +41,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-} 
+}
