@@ -36,15 +36,17 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
           roomId.toLowerCase().replace("#", "")
         );
         
-        const response = await fetch(`/api/rooms/${sanitizedRoomId}/history`);
-        
-        if (!response.ok) {
-          throw new Error(`Failed to fetch messages (${response.status})`);
-        }
+        const response = await fetch(`/api/rooms/${sanitizedRoomId}/history`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         
         const data = await response.json();
-        if (data.error) {
-          throw new Error(data.error);
+        
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || `Failed to fetch messages (${response.status})`);
         }
         
         setMessages(data.messages);

@@ -16,14 +16,16 @@ export async function GET(
     }
 
     const messages = await getRoomMessages(roomId);
+    
     return NextResponse.json({ 
       messages: messages || [],
-      roomId 
+      roomId,
+      success: true
     });
   } catch (error) {
     console.error('Error fetching room history:', error);
     return NextResponse.json(
-      { error: "Failed to fetch room history" },
+      { error: "Failed to fetch room history", success: false },
       { status: 500 }
     );
   }
