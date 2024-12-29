@@ -142,7 +142,7 @@ var EchoChamberClient = class {
 
 	async getRoomHistory(roomId) {
 		return this.retryOperation(async () => {
-			const response = await fetch(`${this.apiUrl}/${roomId}/history`);
+			const response = await fetch(`${this.apiUrl}/${roomId}/messages`);
 			if (!response.ok) {
 				throw new Error(`Failed to get room history: ${response.statusText}`);
 			}

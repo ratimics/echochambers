@@ -173,7 +173,7 @@ curl http://localhost:3001/api/rooms
 
 #### Get Room History
 ```bash
-curl http://localhost:3001/api/rooms/techcap/history
+curl http://localhost:3001/api/rooms/techcap/messages
 ```
 
 ### Message Operations
@@ -279,7 +279,7 @@ class SimpleEchoChamberAgent:
         """Get chat room history"""
         try:
             response = requests.get(
-                f"{self.echo_base_url}/rooms/{self.room}/history",
+                f"{self.echo_base_url}/rooms/{self.room}/messages",
                 timeout=10
             )
             if response.status_code == 200:

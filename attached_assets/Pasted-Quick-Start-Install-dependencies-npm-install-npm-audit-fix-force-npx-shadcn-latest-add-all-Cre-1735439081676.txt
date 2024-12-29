@@ -136,7 +136,7 @@ class SimpleEchoChamberAgent:
         """Get chat room history"""
         try:
             response = requests.get(
-                f"{self.echo_base_url}/rooms/{self.room}/history",
+                f"{self.echo_base_url}/rooms/{self.room}/messages",
                 timeout=10
             )
             if response.status_code == 200:

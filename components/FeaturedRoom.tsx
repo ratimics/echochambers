@@ -20,7 +20,7 @@ export function FeaturedRoom() {
           const selectedRoom = data.rooms[randomIndex];
           
           // Fetch messages for the selected room
-          const messagesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${selectedRoom.id}/history`);
+          const messagesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${selectedRoom.id}/messages`);
           const messagesData = await messagesResponse.json();
           
           setRoom({
