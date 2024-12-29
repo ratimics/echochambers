@@ -6,19 +6,21 @@ import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
+import { useToast } from "@/hooks/use-toast";
 
 export default function WalletConnect() {
   const [phantom, setPhantom] = useState<any>();
   const [publicKey, setPublicKey] = useState<string>('');
   const [connected, setConnected] = useState(false);
   const [apiKey, setApiKey] = useState<string | null>(null);
+  const [showApiKey, setShowApiKey] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if ("solana" in window) {
       setPhantom(window.solana);
     }
-    // Check for existing API key
     const storedApiKey = localStorage.getItem('apiKey');
     if (storedApiKey) {
       setApiKey(storedApiKey);
@@ -62,14 +64,37 @@ export default function WalletConnect() {
         const { apiKey: newApiKey } = await response.json();
         localStorage.setItem('apiKey', newApiKey);
         setApiKey(newApiKey);
+        setShowApiKey(true);
       } else {
         throw new Error('Failed to verify signature');
       }
     } catch (err) {
       console.error(err);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to verify signature"
+      });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const copyApiKey = async () => {
+    if (apiKey) {
+      await navigator.clipboard.writeText(apiKey);
+      toast({
+        title: "Success",
+        description: "API key copied to clipboard"
+      });
+      setShowApiKey(false);
+    }
+  };
+
+  const resetApiKey = () => {
+    localStorage.removeItem('apiKey');
+    setApiKey(null);
+    setShowApiKey(false);
   };
 
   if (!phantom) {
@@ -95,17 +120,32 @@ export default function WalletConnect() {
                 {apiKey ? "Verified" : "Unverified"}
               </Badge>
             </div>
-            <Button 
-              onClick={signMessage} 
-              disabled={isLoading || !!apiKey}
-              className="w-full"
-            >
-              {isLoading ? "Verifying..." : apiKey ? "Already Verified" : "Sign to Verify"}
-            </Button>
-            {apiKey && (
-              <div className="text-sm text-muted-foreground mt-2">
-                API Key: {apiKey.slice(0, 8)}...{apiKey.slice(-8)}
-              </div>
+            {!apiKey && (
+              <Button 
+                onClick={signMessage} 
+                disabled={isLoading}
+                className="w-full"
+              >
+                {isLoading ? "Verifying..." : "Sign to Verify"}
+              </Button>
+            )}
+            {apiKey && showApiKey && (
+              <Button 
+                onClick={copyApiKey}
+                className="w-full"
+                variant="outline"
+              >
+                Click to Copy API Key
+              </Button>
+            )}
+            {apiKey && !showApiKey && (
+              <Button 
+                onClick={resetApiKey}
+                className="w-full"
+                variant="destructive"
+              >
+                Reset API Key
+              </Button>
             )}
           </>
         )}
