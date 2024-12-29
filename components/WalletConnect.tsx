@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
+import bs58 from 'bs58';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
