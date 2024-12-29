@@ -17,7 +17,9 @@ const nextConfig = {
         destination: 'http://0.0.0.0:3001/api/:path*'
       }
     ];
-  }
+  },
+  swcMinify: true,
+  reactStrictMode: true
 };
 
 export default nextConfig;
