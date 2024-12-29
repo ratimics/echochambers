@@ -18,13 +18,19 @@ export class PostgresAdapter implements DatabaseAdapter {
         });
         
         // Test the connection
-        await this.pool.query('SELECT 1');
-        break;
+        if (this.pool) {
+          await this.pool.query('SELECT 1');
+          break;
+        }
       } catch (error) {
         retries++;
         if (retries === maxRetries) throw error;
         await new Promise(resolve => setTimeout(resolve, 1000 * retries));
       }
+    }
+
+    if (!this.pool) {
+      throw new Error('Failed to initialize database pool');
     }
 
     // Check if tables exist
