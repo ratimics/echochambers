@@ -20,7 +20,7 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || ''}/api/rooms`);
+        const response = await fetch('/api/rooms');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
