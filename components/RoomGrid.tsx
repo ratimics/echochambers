@@ -13,13 +13,14 @@ interface RoomGridProps {
 }
 
 export function RoomGrid({ initialRooms }: RoomGridProps) {
-  const [rooms, setRooms] = useState<(ChatRoom & { messages: ChatMessage[] })[]>(initialRooms);
+  const [rooms, setRooms] =
+    useState<(ChatRoom & { messages: ChatMessage[] })[]>(initialRooms);
   const [fullscreenRoom, setFullscreenRoom] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('/api/rooms');
+        const response = await fetch("/api/rooms");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -28,22 +29,27 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
           const roomsWithMessages = await Promise.all(
             data.rooms.map(async (newRoom: ChatRoom) => {
               try {
-                const msgResponse = await fetch(`/api/rooms/${newRoom.id}/history`);
+                const msgResponse = await fetch(
+                  `/api/rooms/${newRoom.id}/messages`,
+                );
                 if (!msgResponse.ok) {
                   return { ...newRoom, messages: [] };
                 }
                 const msgData = await msgResponse.json();
                 return { ...newRoom, messages: msgData.messages || [] };
               } catch (error) {
-                console.error(`Error fetching messages for room ${newRoom.id}:`, error);
+                console.error(
+                  `Error fetching messages for room ${newRoom.id}:`,
+                  error,
+                );
                 return { ...newRoom, messages: [] };
               }
-            })
+            }),
           );
           setRooms(roomsWithMessages);
         }
       } catch (error) {
-        console.error('Error fetching rooms:', error);
+        console.error("Error fetching rooms:", error);
       }
     };
 
@@ -54,12 +60,12 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
 
   // Count unique users who have posted messages
   const getUniqueUsers = (messages: ChatMessage[]) => {
-    const uniqueUsers = new Set(messages.map(msg => msg.sender.username));
+    const uniqueUsers = new Set(messages.map((msg) => msg.sender.username));
     return uniqueUsers.size;
   };
 
   if (fullscreenRoom) {
-    const room = rooms.find(r => r.id === fullscreenRoom);
+    const room = rooms.find((r) => r.id === fullscreenRoom);
     if (!room) return null;
 
     return (
@@ -69,8 +75,8 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
             <h1 className="text-2xl font-mono">{room.name}</h1>
             <p className="text-muted-foreground">{room.topic}</p>
           </div>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="icon"
             onClick={() => setFullscreenRoom(null)}
           >
@@ -92,7 +98,9 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
             <div className="flex justify-between items-start mb-2">
               <div>
                 <CardTitle className="text-xl font-mono">{room.name}</CardTitle>
-                <p className="text-sm text-muted-foreground mt-1">{room.topic}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {room.topic}
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="flex flex-col items-end gap-1">
@@ -103,8 +111,8 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
                     {room.messageCount} 💬
                   </Badge>
                 </div>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="icon"
                   onClick={() => setFullscreenRoom(room.id)}
                 >
@@ -121,13 +129,10 @@ export function RoomGrid({ initialRooms }: RoomGridProps) {
             </div>
           </CardHeader>
           <CardContent className="flex-1 overflow-hidden">
-            <ChatWindow 
-              roomId={room.id} 
-              initialMessages={room.messages}
-            />
+            <ChatWindow roomId={room.id} initialMessages={room.messages} />
           </CardContent>
         </Card>
       ))}
     </div>
   );
-} 
+}
