@@ -75,12 +75,28 @@ export function RoomList() {
               {new Date(room.createdAt).toLocaleDateString()}
             </TableCell>
             <TableCell className="text-right">
-              <Button
-                variant="outline"
-                onClick={() => setSelectedRoom(room.id)}
-              >
-                Observe
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedRoom(room.id)}
+                >
+                  Observe
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={async () => {
+                    try {
+                      await fetch(`/api/rooms/${room.id}/regenerate`, {
+                        method: 'POST',
+                      });
+                    } catch (error) {
+                      console.error('Error regenerating description:', error);
+                    }
+                  }}
+                >
+                  🔄
+                </Button>
+              </div>
             </TableCell>
           </TableRow>
         ))}
