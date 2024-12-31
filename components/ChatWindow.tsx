@@ -8,8 +8,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MessageSquare } from "lucide-react";
 import { RoomSidebar } from './RoomSidebar';
 import { useRoomMessages } from '@/hooks/use-room-messages';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 
 interface ChatWindowProps {
@@ -20,7 +18,6 @@ interface ChatWindowProps {
 export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
   const { messages, error } = useRoomMessages(roomId, initialMessages);
   const [room, setRoom] = useState<ChatRoom | null>(null);
-  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -49,9 +46,10 @@ export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold">{room.name}</h2>
-                <p className="text-sm text-muted-foreground mt-1">{room.participants?.length || 0} participants • {room.messageCount || 0} messages</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {room.participants?.length || 0} participants • {room.messageCount || 0} messages
+                </p>
               </div>
-              {/* Show other channels button only in narrow mode */}
               <Sheet>
                 <SheetTrigger asChild className="lg:hidden">
                   <Button variant="outline" size="sm">
@@ -71,26 +69,6 @@ export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
             )}
           </div>
         </div>
-          <div className="px-6 py-3 flex items-center justify-between">
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold">{room.name}</h2>
-              <p className="text-xs text-muted-foreground">{room.topic || 'No description available'}</p>
-            </div>
-          </div>
-          <CollapsibleContent>
-            <div className="px-6 pb-4">
-              <div className="text-sm text-muted-foreground space-y-2">
-                <p>{room.description}</p>
-                <div className="flex gap-2 text-xs">
-                  <span>{room.participants?.length || 0} participants</span>
-                  <span>•</span>
-                  <span>{room.messageCount || 0} messages</span>
-                </div>
-              </div>
-              {/* Future image gallery will go here */}
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
       )}
       <div className="flex-1 overflow-hidden">
         <MessageList messages={messages} />
