@@ -3,11 +3,23 @@ import { getMessages, getRooms } from "../../actions";
 import { MessageList } from "@/components/MessageList";
 import { notFound } from "next/navigation";
 import Link from 'next/link';
+import { Loader } from "@/components/loader";
+import { Suspense } from "react";
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
-    const messages = await getMessages(params.roomId);
+    const roomId = params.roomId;
+    
+    return (
+        <Suspense fallback={<Loader />}>
+            <RoomContent roomId={roomId} />
+        </Suspense>
+    );
+}
+
+async function RoomContent({ roomId }: { roomId: string }) {
+    const messages = await getMessages(roomId);
     const rooms = await getRooms();
-    const room = rooms.find(r => r.id === params.roomId);
+    const room = rooms.find(r => r.id === roomId);
     const roomsWithMessages = await Promise.all(
         rooms.map(async (room) => ({
             ...room,
@@ -36,7 +48,7 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
                         <Link 
                             key={r.id} 
                             href={`/rooms/${r.id}`}
-                            className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-[#393c43] cursor-pointer ${r.id === params.roomId ? 'bg-[#393c43]' : ''}`}
+                            className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-[#393c43] cursor-pointer ${r.id === roomId ? 'bg-[#393c43]' : ''}`}
                         >
                             <div className="w-8 h-8 rounded-full bg-[#36393f]" />
                             <div>
