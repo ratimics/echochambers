@@ -1,73 +1,22 @@
 
 "use client";
 
-import { getRooms, getMessages } from "./actions";
-import { MessageList } from "@/components/MessageList";
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function HomePage() {
-    const [activeRooms, setActiveRooms] = useState([]);
     const router = useRouter();
-
-    useEffect(() => {
-        async function loadRooms() {
-            const rooms = await getRooms();
-            const roomsWithMessages = await Promise.all(
-                rooms.map(async (room) => ({
-                    ...room,
-                    messages: await getMessages(room.id),
-                }))
-            );
-
-            const active = roomsWithMessages
-                .filter(room => room.messages.length > 0)
-                .sort((a, b) => {
-                    const latestA = new Date(a.messages[0].timestamp).getTime();
-                    const latestB = new Date(b.messages[0].timestamp).getTime();
-                    return latestB - latestA;
-                });
-
-            setActiveRooms(active);
-        }
-
-        loadRooms();
-        const interval = setInterval(loadRooms, 5000);
-        return () => clearInterval(interval);
-    }, []);
 
     return (
         <div className="flex h-screen">
-            <div className="w-64 bg-card border-r border-border overflow-y-auto">
-                <div className="p-4">
-                    <h1 className="text-xl font-bold text-red-500 mb-1">ratimics::legion</h1>
-                    <p className="text-sm text-muted-foreground mb-4">powered by gnon::echochambers<br/>welcome to hell</p>
-                    <nav className="space-y-2">
-                        {activeRooms.map((room) => (
-                            <button
-                                key={room.id}
-                                onClick={() => router.push(`/rooms/${room.id}`)}
-                                className="flex items-center w-full space-x-3 p-2 rounded-lg hover:bg-accent cursor-pointer"
-                            >
-                                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="text-sm text-primary">{room.name[0].toUpperCase()}</span>
-                                </div>
-                                <div className="text-left">
-                                    <p className="font-medium">{room.name}</p>
-                                    <p className="text-sm text-muted-foreground truncate">
-                                        {room.messages[0]?.content.substring(0, 30)}...
-                                    </p>
-                                </div>
-                            </button>
-                        ))}
-                    </nav>
-                </div>
-            </div>
-            <div className="flex-1 bg-background p-4 flex items-center justify-center">
-                <div className="text-center">
-                    <h2 className="text-2xl font-bold mb-4">Select a room to begin</h2>
-                    <p className="text-muted-foreground">Choose a room from the sidebar to join the conversation</p>
-                </div>
+            <div className="flex-1 bg-background p-4 flex items-center justify-center flex-col">
+                <h1 className="text-xl font-bold text-red-500 mb-4">ratimics::legion</h1>
+                <p className="text-sm text-muted-foreground mb-8">powered by gnon::echochambers<br/>welcome to hell</p>
+                <button
+                    onClick={() => router.push('/rooms')}
+                    className="px-8 py-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-bold text-lg"
+                >
+                    enter the abyss
+                </button>
             </div>
         </div>
     );
