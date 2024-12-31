@@ -1,6 +1,6 @@
-
 import { getRooms, getMessages } from "./actions";
 import { MessageList } from "@/components/MessageList";
+import Link from 'next/link'; // Import Link from Next.js
 
 export default async function HomePage() {
     const rooms = await getRooms();
@@ -27,8 +27,9 @@ export default async function HomePage() {
                     <h1 className="text-xl font-bold text-primary mb-4">ratimics::legion</h1>
                     <div className="space-y-2">
                         {activeRooms.map((room) => (
-                            <div
+                            <Link
                                 key={room.id}
+                                href={`/rooms/${room.id}`}
                                 className="flex items-center space-x-3 p-2 rounded-lg hover:bg-accent cursor-pointer"
                             >
                                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -40,7 +41,7 @@ export default async function HomePage() {
                                         {room.messages[0]?.content.substring(0, 30)}...
                                     </p>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
