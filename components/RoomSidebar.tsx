@@ -14,7 +14,7 @@ interface RoomSidebarProps {
   currentRoomId?: string;
 }
 
-export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
+export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {

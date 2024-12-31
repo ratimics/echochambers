@@ -9,7 +9,7 @@ import { Home, BookOpen, MessageSquare, Menu, Sparkles } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { RoomSidebar } from "../RoomSidebar"; // Assuming RoomSidebar is in the same directory
+import { RoomSidebar } from "../RoomSidebar";
 
 export function MainNav() {
     const pathname = usePathname();
