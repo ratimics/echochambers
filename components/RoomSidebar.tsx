@@ -16,15 +16,11 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
   const [rooms, setRooms] = useState<ChatRoom[]>([]);
 
   useEffect(() => {
-    // Filter and sort rooms
     const filteredRooms = activeRooms
       .filter(room => room.messageCount > 0)
       .sort((a, b) => b.messageCount - a.messageCount);
-    
-    if (JSON.stringify(rooms) !== JSON.stringify(filteredRooms)) {
-      setRooms(filteredRooms);
-    }
-  }, [activeRooms]);
+    setRooms(filteredRooms);
+  }, [JSON.stringify(activeRooms)]);
 
   return (
     <div className={`w-64 lg:block bg-[#2b2d31] p-4 ${isMobileMenuOpen ? 'block' : 'hidden'} lg:block`}>
