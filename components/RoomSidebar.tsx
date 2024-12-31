@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { MessageSquare } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 
@@ -13,15 +13,11 @@ interface RoomSidebarProps {
 
 export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [rooms, setRooms] = useState<ChatRoom[]>([]);
 
-  useEffect(() => {
-    if (activeRooms && activeRooms.length > 0) {
-      const filteredRooms = activeRooms
-        .filter(room => room.messageCount > 0)
-        .sort((a, b) => b.messageCount - a.messageCount);
-      setRooms(filteredRooms);
-    }
+  const filteredRooms = useCallback(() => {
+    return activeRooms
+      .filter(room => room.messageCount > 0)
+      .sort((a, b) => b.messageCount - a.messageCount);
   }, [activeRooms]);
 
   return (
@@ -34,7 +30,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
         {isMobileMenuOpen ? 'X' : '☰'}
       </button>
       <div className="space-y-2">
-        {rooms.map((r) => (
+        {filteredRooms().map((r) => (
           <Link 
             key={r.id} 
             href={`/rooms/${r.id}`}
