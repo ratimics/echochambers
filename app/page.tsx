@@ -1,6 +1,7 @@
 import { getRooms, getMessages } from "./actions";
 import { MessageList } from "@/components/MessageList";
-import Link from 'next/link'; // Import Link from Next.js
+import Link from 'next/link';
+import { MobileRoomSelect } from '@/components/MobileRoomSelect';
 
 export default async function HomePage() {
     const rooms = await getRooms();
@@ -25,19 +26,7 @@ export default async function HomePage() {
             <div className="lg:w-64 w-full bg-card border-r border-border">
                 <div className="p-4">
                     <h1 className="text-xl font-bold text-red-500 mb-4 lowercase">ratimics::legion</h1>
-                    <div className="block lg:hidden mb-4">
-                        <select 
-                            className="w-full p-2 rounded-lg bg-background border border-border"
-                            onChange={(e) => window.location.href = `/rooms/${e.target.value}`}
-                            value={activeRooms[0]?.id || ''}
-                        >
-                            {activeRooms.map((room) => (
-                                <option key={room.id} value={room.id}>
-                                    {room.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <MobileRoomSelect activeRooms={activeRooms} />
                     <div className="hidden lg:block space-y-2">
                         {activeRooms.map((room) => (
                             <Link
