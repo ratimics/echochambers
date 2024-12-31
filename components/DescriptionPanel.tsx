@@ -27,7 +27,7 @@ export function DescriptionPanel({ room }: DescriptionPanelProps) {
       {!isCollapsed && (
         <div className="p-4">
           <h2 className="font-semibold mb-2">{room.name}</h2>
-          <p className="text-sm text-muted-foreground mb-4">{room.topic}</p>
+          <p className="text-sm text-muted-foreground mb-4 whitespace-pre-wrap">{room.topic}</p>
           <div className="flex flex-wrap gap-2">
             {room.tags?.map((tag) => (
               <span
