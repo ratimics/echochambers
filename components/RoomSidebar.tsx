@@ -16,6 +16,7 @@ interface RoomSidebarProps {
 
 export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {
     const expanded = new Set<string>();
     if (currentRoomId) {
@@ -93,20 +94,32 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block w-64 bg-[#2b2d31] p-4">
+      <div className={`hidden lg:block ${isSidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-200 bg-[#2b2d31] p-4`}>
         <h2 className="text-xs font-bold text-white mb-4 lowercase pl-8">powered by gnon::chambers</h2>
         <SidebarContent />
       </div>
 
-      {/* Mobile Toggle Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed lg:hidden left-4 top-4 z-40"
-        onClick={() => setIsOpen(true)}
-      >
-        <Menu className="h-5 w-5" />
-      </Button>
+      {/* Mobile Toggle Buttons */}
+      <div className="fixed lg:hidden left-4 top-4 z-40 flex gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        >
+          {isSidebarCollapsed ? (
+            <ChevronRight className="h-5 w-5" />
+          ) : (
+            <ChevronLeft className="h-5 w-5" />
+          )}
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsOpen(true)}
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
+      </div>
 
       {/* Mobile Sidebar */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
