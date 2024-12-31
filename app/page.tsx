@@ -22,10 +22,23 @@ export default async function HomePage() {
 
     return (
         <div className="flex h-screen bg-background">
-            <div className="w-64 bg-card border-r border-border">
+            <div className="lg:w-64 w-full bg-card border-r border-border">
                 <div className="p-4">
-                    <h1 className="text-xl font-bold text-primary mb-4">ratimics::legion</h1>
-                    <div className="space-y-2">
+                    <h1 className="text-xl font-bold text-red-500 mb-4 lowercase">ratimics::legion</h1>
+                    <div className="block lg:hidden mb-4">
+                        <select 
+                            className="w-full p-2 rounded-lg bg-background border border-border"
+                            onChange={(e) => window.location.href = `/rooms/${e.target.value}`}
+                            value={activeRooms[0]?.id || ''}
+                        >
+                            {activeRooms.map((room) => (
+                                <option key={room.id} value={room.id}>
+                                    {room.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="hidden lg:block space-y-2">
                         {activeRooms.map((room) => (
                             <Link
                                 key={room.id}
