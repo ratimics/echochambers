@@ -3,19 +3,26 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { MessageSquare } from 'lucide-react';
+import { ChatRoom } from '@/server/types';
 
 interface RoomSidebarProps {
-  activeRooms?: any[];
+  activeRooms?: ChatRoom[];
   currentRoomId?: string;
 }
 
 export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [rooms, setRooms] = useState(activeRooms);
+  const [rooms, setRooms] = useState<ChatRoom[]>([]);
 
   useEffect(() => {
-    if (JSON.stringify(rooms) !== JSON.stringify(activeRooms)) {
-      setRooms(activeRooms);
+    // Filter and sort rooms
+    const filteredRooms = activeRooms
+      .filter(room => room.messageCount > 0)
+      .sort((a, b) => b.messageCount - a.messageCount);
+    
+    if (JSON.stringify(rooms) !== JSON.stringify(filteredRooms)) {
+      setRooms(filteredRooms);
     }
   }, [activeRooms]);
 
@@ -37,11 +44,16 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
               r.id === currentRoomId ? 'bg-[#393c43]' : ''
             }`}
           >
-            <div className="w-8 h-8 rounded-full bg-[#36393f]" />
-            <div>
-              <p className="text-white font-medium">{r.name}</p>
+            <div className="w-8 h-8 rounded-full bg-[#36393f] flex items-center justify-center">
+              <MessageSquare className="w-4 h-4 text-gray-400" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between">
+                <p className="text-white font-medium">{r.name}</p>
+                <span className="text-xs text-gray-400">{r.messageCount}</span>
+              </div>
               <p className="text-sm text-gray-400 truncate">
-                {r.messages && r.messages[0]?.content}
+                {r.topic}
               </p>
             </div>
           </Link>
