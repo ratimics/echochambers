@@ -14,7 +14,7 @@ interface RoomSidebarProps {
   currentRoomId?: string;
 }
 
-export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
+export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {
@@ -37,7 +37,6 @@ export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: Ro
     });
   }, []);
 
-  // Filter rooms with messages
   const activeRoomsWithMessages = activeRooms.filter(room => room.messageCount > 0);
 
   const SidebarContent = () => (
@@ -71,7 +70,6 @@ export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: Ro
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <div className={`hidden lg:block ${isSidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-200 bg-[#2b2d31] p-4`}>
         <h2 className="text-xs font-bold text-white mb-4 lowercase pl-8">powered by gnon::chambers</h2>
         <SidebarContent />
