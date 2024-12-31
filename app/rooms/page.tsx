@@ -15,7 +15,6 @@ export default async function RoomsPage() {
         }))
     );
 
-    // Filter and sort rooms with messages by latest message
     const activeRooms = roomsWithMessages
         .filter(room => room.messages.length > 0)
         .sort((a, b) => {
