@@ -1,13 +1,13 @@
 "use client";
 
 import Link from 'next/link';
-import { DialogTitle } from "@/components/ui/dialog";
 import { useState, useCallback } from 'react';
 import { MessageSquare, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Dialog, DialogTitle, DialogContent } from "@/components/ui/dialog";
 
 interface RoomSidebarProps {
   activeRooms?: ChatRoom[];
@@ -84,7 +84,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
     <>
       {/* Desktop Sidebar */}
       <div className="hidden lg:block w-64 bg-[#2b2d31] p-4">
-        <h2 className="text-xl font-bold text-white mb-4 lowercase">ratimics::legion</h2>
+        <h2 className="text-xl font-bold text-white mb-4 lowercase pl-8">ratimics::legion</h2>
         <SidebarContent />
       </div>
 
@@ -97,7 +97,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-80 bg-[#2b2d31] border-r-0">
-            <h2 className="text-xl font-bold text-white mb-4 lowercase">ratimics::legion</h2>
+            <DialogTitle className="text-xl font-bold text-white mb-4 lowercase pl-8">ratimics::legion</DialogTitle>
             <SidebarContent />
           </SheetContent>
         </Sheet>
