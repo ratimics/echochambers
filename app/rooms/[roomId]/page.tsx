@@ -20,7 +20,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
     <div className="flex-1 flex flex-col">
       {isHomeRoom ? (
         <div className="flex h-full items-center justify-center text-muted-foreground">
-          <p>👈 Choose a room from the sidebar to begin chatting</p>
+          <p>👈 Choose a room from the sidebar to explore the chambers</p>
         </div>
       ) : (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
