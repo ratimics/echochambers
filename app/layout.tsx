@@ -2,8 +2,9 @@
 import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { MainNav } from "@/components/nav/main-nav";
 
 export const metadata: Metadata = {
     title: "ratimics::legion",
@@ -19,7 +20,12 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={`${GeistMono.className} min-h-screen bg-background antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-                    <main className="flex-1">{children}</main>
+                    <div className="flex min-h-screen flex-col">
+                        <MainNav />
+                        <div className="flex flex-1">
+                            {children}
+                        </div>
+                    </div>
                     <Toaster />
                 </ThemeProvider>
             </body>
