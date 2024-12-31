@@ -14,7 +14,9 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
   const [rooms, setRooms] = useState(activeRooms);
 
   useEffect(() => {
-    setRooms(activeRooms);
+    if (JSON.stringify(rooms) !== JSON.stringify(activeRooms)) {
+      setRooms(activeRooms);
+    }
   }, [activeRooms]);
 
   return (
