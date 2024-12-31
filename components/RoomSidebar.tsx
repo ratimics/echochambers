@@ -40,7 +40,7 @@ export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: Ro
   // Filter rooms with messages
   const activeRoomsWithMessages = activeRooms.filter(room => room.messageCount > 0);
 
-  const SidebarContent = React.memo(() => (
+  const SidebarContent = () => (
     <div className="space-y-2">
       {activeRoomsWithMessages.map((room) => (
         <Collapsible
@@ -67,7 +67,7 @@ export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: Ro
         </Collapsible>
       ))}
     </div>
-  );
+  )
 
   return (
     <>
@@ -76,8 +76,6 @@ export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: Ro
         <h2 className="text-xs font-bold text-white mb-4 lowercase pl-8">powered by gnon::chambers</h2>
         <SidebarContent />
       </div>
-
-      
     </>
   );
 }
