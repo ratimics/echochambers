@@ -1,6 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import { listRooms } from "@/server/store";
+import { getRoomMessages } from "@/server/store";
 
 export async function GET(
   req: Request,
@@ -18,7 +19,14 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(room);
+    // Get recent messages for the room
+    const messages = await getRoomMessages(roomId);
+    
+    return NextResponse.json({
+      ...room,
+      messages: messages || []
+    });
+
   } catch (error) {
     console.error('Error fetching room:', error);
     return NextResponse.json(
