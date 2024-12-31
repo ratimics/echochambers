@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { MessageList } from './MessageList';
 import { ChatRoom } from '@/server/types';
 import { useRoomMessages } from '@/hooks/use-room-messages';
+import { DescriptionPanel } from './DescriptionPanel';
 
 interface ChatWindowProps {
   roomId: string;
@@ -32,7 +33,8 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   }, [roomId]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full">
+      <div className="flex flex-col flex-1">
       {room && (
         <div className="sticky top-0 z-10">
           <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b p-4">
@@ -51,5 +53,7 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
         <MessageList messages={messages} />
       </div>
     </div>
+    <DescriptionPanel room={room} />
+  </div>
   );
 }
