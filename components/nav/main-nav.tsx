@@ -40,7 +40,8 @@ export function MainNav() {
         <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
             <div className="container flex h-16 items-center justify-between px-4">
                 <Link href="/" className="flex items-center space-x-2">
-                    <span className="font-bold text-xl text-red-500 lowercase">ratimics::legion</span>
+                    <span className="font-bold text-xl text-red-500 lowercase hidden md:inline">ratimics::legion</span>
+                    <span className="font-bold text-xl text-red-500 lowercase md:hidden">rati::legion</span>
                 </Link>
 
                 <div className="hidden md:flex items-center space-x-1">

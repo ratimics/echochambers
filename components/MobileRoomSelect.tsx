@@ -19,10 +19,10 @@ export function MobileRoomSelect({ activeRooms, currentRoomId }: MobileRoomSelec
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="block lg:hidden">
+    <div className="block lg:hidden ml-2">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="lg:hidden">
+          <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9">
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
