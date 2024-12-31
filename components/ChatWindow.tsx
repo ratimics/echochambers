@@ -1,4 +1,6 @@
 
+"use client";
+
 import { useState, useEffect } from 'react';
 import { MessageList } from './MessageList';
 import { useRoomMessages } from '@/hooks/use-room-messages';
