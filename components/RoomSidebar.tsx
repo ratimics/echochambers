@@ -94,7 +94,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
     <>
       {/* Desktop Sidebar */}
       <div className="hidden lg:block w-64 bg-[#2b2d31] p-4">
-        <h2 className="text-xl font-bold text-white mb-4 lowercase pl-8">ratimics::legion</h2>
+        <h2 className="text-xs font-bold text-white mb-4 lowercase pl-8">powered by gnon::chambers</h2>
         <SidebarContent />
       </div>
 
