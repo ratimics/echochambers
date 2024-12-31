@@ -40,7 +40,7 @@ export default function RoomSidebar({ activeRooms = [], currentRoomId = '' }: Ro
   // Filter rooms with messages
   const activeRoomsWithMessages = activeRooms.filter(room => room.messageCount > 0);
 
-  const SidebarContent = () => (
+  const SidebarContent = React.memo(() => (
     <div className="space-y-2">
       {activeRoomsWithMessages.map((room) => (
         <Collapsible

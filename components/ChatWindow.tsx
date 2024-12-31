@@ -20,20 +20,26 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
     const fetchRoom = async () => {
       try {
         const response = await fetch(`/api/rooms/${roomId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setRoom(data);
+        if (!response.ok) {
+          throw new Error('Failed to fetch room');
         }
+        const data = await response.json();
+        setRoom(data);
       } catch (error) {
         console.error('Error fetching room:', error);
+        // Handle error state appropriately
       }
     };
 
+    let mounted = true;
     fetchRoom();
+    return () => {
+      mounted = false;
+    };
   }, [roomId]);
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full" role="main" aria-label="Chat Window">
       <div className="flex flex-col flex-1">
       {room && (
         <div className="sticky top-0 z-10">
