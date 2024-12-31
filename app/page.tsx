@@ -15,7 +15,7 @@ function HomeContent() {
           powered by gnon::echochambers<br/>welcome to hell
         </p>
         <button
-          onClick={() => router.push('/rooms')}
+          onClick={() => router.push('/rooms/home')}
           className="px-8 py-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 active:shadow-lg"
         >
           enter the abyss

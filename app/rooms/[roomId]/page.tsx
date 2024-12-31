@@ -7,16 +7,22 @@ import { redirect } from "next/navigation";
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
   const { roomId } = params;
   
-  // If no roomId, redirect to first room
+  // Redirect /rooms to /rooms/home
   if (roomId === 'rooms') {
-    const rooms = await getRooms();
-    const firstRoom = rooms[0]?.id || 'general';
-    redirect(`/rooms/${firstRoom}`);
+    redirect('/rooms/home');
   }
+
+  const isHomeRoom = roomId === 'home';
   
   return (
     <div className="flex-1">
-      <ChatWindow roomId={roomId} />
+      {isHomeRoom ? (
+        <div className="flex h-full items-center justify-center text-muted-foreground">
+          <p>👈 Choose a room from the sidebar to begin chatting</p>
+        </div>
+      ) : (
+        <ChatWindow roomId={roomId} />
+      )}
     </div>
   );
 }
