@@ -14,9 +14,9 @@ function ErrorFallback({ error }: { error: Error }) {
   );
 }
 
-export default function RoomPage({ params }: { params: { roomId: string } }) {
-  const roomId = params.roomId;
-  const isHomeRoom = roomId === 'home';
+export default function RoomPage({ params }: { params: Promise<{ roomId: string }> }) {
+  const resolvedParams = use(params);
+  const isHomeRoom = resolvedParams.roomId === 'home';
   
   return (
     <div className="flex-1 flex flex-col">
