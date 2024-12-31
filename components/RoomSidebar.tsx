@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { DialogTitle } from "@/components/ui/dialog";
 import { useState, useCallback } from 'react';
 import { MessageSquare, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
