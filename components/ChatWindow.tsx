@@ -1,13 +1,10 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
 import { MessageList } from './MessageList';
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MessageSquare } from "lucide-react";
-import { RoomSidebar } from './RoomSidebar';
-import { useRoomMessages } from '@/hooks/use-room-messages';
 import { ChatRoom } from '@/server/types';
+import { useRoomMessages } from '@/hooks/use-room-messages';
 
 interface ChatWindowProps {
   roomId: string;
@@ -15,13 +12,13 @@ interface ChatWindowProps {
 }
 
 export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
+  const { messages, loading, error } = useRoomMessages(roomId, initialMessages);
   const [room, setRoom] = useState<ChatRoom | null>(null);
-  const [messages, setMessages] = useState(initialMessages);
 
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const response = await fetch(`/api/rooms/${roomId}/history`);
+        const response = await fetch(`/api/rooms/${roomId}`);
         if (response.ok) {
           const data = await response.json();
           setRoom(data);
@@ -43,7 +40,7 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
               <div>
                 <h2 className="text-lg font-semibold">{room.name}</h2>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {room.participants?.length || 0} participants • {room.messageCount || 0} messages
+                  {room.participants?.length || 0} participants • {messages.length} messages
                 </p>
               </div>
             </div>
