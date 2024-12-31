@@ -1,8 +1,7 @@
 
 'use client';
 
-import { use } from 'react';
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 import { RoomSidebar } from '@/components/RoomSidebar';
 import { ChatWindow } from '@/components/ChatWindow';
 import { getMessages } from '@/app/actions';
