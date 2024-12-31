@@ -21,7 +21,7 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const response = await fetch(`/api/rooms/${roomId}`);
+        const response = await fetch(`/api/rooms/${roomId}/history`);
         if (response.ok) {
           const data = await response.json();
           setRoom(data);
