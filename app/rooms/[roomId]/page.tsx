@@ -1,17 +1,10 @@
 
 import { ChatWindow } from "@/components/ChatWindow";
-import { use } from "react";
-import { getRooms } from "@/app/actions";
 import { redirect } from "next/navigation";
+import { use } from "react";
 
-export default async function RoomPage({ params }: { params: { roomId: string } }) {
-  const { roomId } = params;
-  
-  // Redirect /rooms to /rooms/home
-  if (roomId === 'rooms') {
-    redirect('/rooms/home');
-  }
-
+export default function RoomPage({ params }: { params: { roomId: string } }) {
+  const roomId = use(Promise.resolve(params.roomId));
   const isHomeRoom = roomId === 'home';
   
   return (
