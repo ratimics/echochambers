@@ -77,35 +77,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
         <SidebarContent />
       </div>
 
-      {/* Mobile Toggle Buttons */}
-      <div className="fixed lg:hidden left-4 top-4 z-40 flex gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        >
-          {isSidebarCollapsed ? (
-            <ChevronRight className="h-5 w-5" />
-          ) : (
-            <ChevronLeft className="h-5 w-5" />
-          )}
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsOpen(true)}
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
-      </div>
-
-      {/* Mobile Sidebar */}
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent side="left" className="w-80 bg-[#2b2d31] border-r-0">
-          <h2 className="text-xl font-bold text-white mb-4 lowercase pl-8">ratimics::legion</h2>
-          <SidebarContent />
-        </SheetContent>
-      </Sheet>
+      
     </>
   );
 }
