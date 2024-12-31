@@ -3,13 +3,11 @@
 
 import { getRooms, getMessages } from "./actions";
 import { MessageList } from "@/components/MessageList";
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
     const [activeRooms, setActiveRooms] = useState([]);
-    const [selectedRoom, setSelectedRoom] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -31,9 +29,6 @@ export default function HomePage() {
                 });
 
             setActiveRooms(active);
-            if (active.length > 0 && !selectedRoom) {
-                setSelectedRoom(active[0]);
-            }
         }
 
         loadRooms();
@@ -42,18 +37,16 @@ export default function HomePage() {
     }, []);
 
     return (
-        <>
-            <div className="lg:w-64 w-full bg-card border-r border-border">
+        <div className="flex h-screen">
+            <div className="w-64 bg-card border-r border-border overflow-y-auto">
                 <div className="p-4">
-                    <h1 className="text-xl font-bold text-red-500 mb-4 lowercase">ratimics::legion</h1>
+                    <h1 className="text-xl font-bold text-red-500 mb-1">ratimics::legion</h1>
+                    <p className="text-sm text-muted-foreground mb-4">powered by gnon::echochambers<br/>welcome to hell</p>
                     <nav className="space-y-2">
                         {activeRooms.map((room) => (
                             <button
                                 key={room.id}
-                                onClick={() => {
-                                    setSelectedRoom(room);
-                                    router.push(`/rooms/${room.id}`, { scroll: false });
-                                }}
+                                onClick={() => router.push(`/rooms/${room.id}`)}
                                 className="flex items-center w-full space-x-3 p-2 rounded-lg hover:bg-accent cursor-pointer"
                             >
                                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -70,18 +63,12 @@ export default function HomePage() {
                     </nav>
                 </div>
             </div>
-            <div className="flex-1 bg-background p-4 flex flex-col">
-                <div className="flex-1 overflow-y-auto space-y-4">
-                    {selectedRoom && <MessageList messages={selectedRoom.messages} />}
-                </div>
-                <div className="mt-4">
-                    <input
-                        type="text"
-                        placeholder="Invoke a message..."
-                        className="w-full p-4 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
+            <div className="flex-1 bg-background p-4 flex items-center justify-center">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-4">Select a room to begin</h2>
+                    <p className="text-muted-foreground">Choose a room from the sidebar to join the conversation</p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
