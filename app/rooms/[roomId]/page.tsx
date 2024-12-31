@@ -1,10 +1,9 @@
-
 import { getMessages, getRooms } from "../../actions";
 import { MessageList } from "@/components/MessageList";
 import { notFound } from "next/navigation";
 import Link from 'next/link';
 import { Loader } from "@/components/loader";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
     const roomId = params.roomId;
@@ -39,10 +38,16 @@ async function RoomContent({ roomId }: { roomId: string }) {
         return notFound();
     }
 
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
         <div className="flex h-screen bg-[#1a1b1e]">
-            <div className="w-64 bg-[#2b2d31] p-4">
+            <div className={`w-64 lg:block bg-[#2b2d31] p-4 ${isMobileMenuOpen ? 'block' : 'hidden'} lg:hidden`}> {/* Added conditional class for mobile menu */}
                 <h2 className="text-xl font-bold text-white mb-4">Ratimics::Legion</h2>
+                <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden text-white">
+                    {/* Hamburger menu button */}
+                    {isMobileMenuOpen ? 'X' : '☰'}
+                </button>
                 <div className="space-y-2">
                     {activeRooms.map((r) => (
                         <Link 
