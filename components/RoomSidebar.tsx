@@ -3,12 +3,11 @@
 
 import Link from 'next/link';
 import { useState, useCallback } from 'react';
-import { MessageSquare, ChevronDown, ChevronUp, Users } from 'lucide-react';
+import { MessageSquare, ChevronDown, ChevronUp, Users, Menu } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Dialog, DialogTitle } from "@/components/ui/dialog";
 
 interface RoomSidebarProps {
   activeRooms?: ChatRoom[];
@@ -16,11 +15,11 @@ interface RoomSidebarProps {
 }
 
 export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
-  const [isOpen, setIsOpen] = useState(currentRoomId === 'home');
+  const [isOpen, setIsOpen] = useState(false);
   const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {
     const expanded = new Set<string>();
-    if (currentRoomId === 'home') {
-      expanded.add('home');
+    if (currentRoomId) {
+      expanded.add(currentRoomId);
     }
     return expanded;
   });
@@ -37,9 +36,12 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
     });
   }, []);
 
+  // Filter rooms with messages
+  const activeRoomsWithMessages = activeRooms.filter(room => room.messageCount > 0);
+
   const SidebarContent = () => (
     <div className="space-y-2">
-      {activeRooms.map((room) => (
+      {activeRoomsWithMessages.map((room) => (
         <Collapsible
           key={room.id}
           open={expandedRooms.has(room.id)}
@@ -96,24 +98,23 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
         <SidebarContent />
       </div>
 
+      {/* Mobile Toggle Button */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="fixed lg:hidden left-4 top-4 z-40"
+        onClick={() => setIsOpen(true)}
+      >
+        <Menu className="h-5 w-5" />
+      </Button>
+
       {/* Mobile Sidebar */}
-      <div className="lg:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="fixed left-4 top-4 z-40"
-            >
-              <MessageSquare className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-80 bg-[#2b2d31] border-r-0">
-            <DialogTitle className="text-xl font-bold text-white mb-4 lowercase pl-8">ratimics::legion</DialogTitle>
-            <SidebarContent />
-          </SheetContent>
-        </Sheet>
-      </div>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetContent side="left" className="w-80 bg-[#2b2d31] border-r-0">
+          <h2 className="text-xl font-bold text-white mb-4 lowercase pl-8">ratimics::legion</h2>
+          <SidebarContent />
+        </SheetContent>
+      </Sheet>
     </>
   );
 }
