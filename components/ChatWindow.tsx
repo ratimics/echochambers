@@ -23,15 +23,17 @@ export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
     const fetchRoom = async () => {
       try {
         const response = await fetch(`/api/rooms/${roomId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setRoom(data);
-        }
+        if (!response.ok) throw new Error('Failed to fetch room');
+        const data = await response.json();
+        setRoom(data);
       } catch (error) {
         console.error('Error fetching room:', error);
       }
     };
-    fetchRoom();
+    
+    if (roomId) {
+      fetchRoom();
+    }
   }, [roomId]);
 
   if (error) {
