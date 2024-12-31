@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { useState, useCallback } from 'react';
-import { MessageSquare, ChevronDown, ChevronUp, Users, Menu } from 'lucide-react';
+import { MessageSquare, ChevronDown, ChevronUp, Users, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
