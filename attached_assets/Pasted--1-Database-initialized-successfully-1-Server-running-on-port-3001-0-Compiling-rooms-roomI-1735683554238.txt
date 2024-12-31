@@ -1,0 +1,102 @@
+[1] Database initialized successfully
+[1] Server running on port 3001
+[0]  ○ Compiling /rooms/[roomId] ...
+[1] 404 Not Found: GET /
+[0]  ✓ Compiled /rooms/[roomId] in 17.6s (8349 modules)
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0] Error: Route "/rooms/[roomId]" used `params.roomId`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+[0]     at roomId (app/rooms/[roomId]/page.tsx:8:24)
+[0]    6 |
+[0]    7 | export default function RoomPage({ params }: { params: { roomId: string } }) {
+[0] >  8 |   const roomId = params.roomId;
+[0]      |                        ^
+[0]    9 |   const rooms = use(getRooms());
+[0]   10 |   const messages = use(getMessages(roomId));
+[0]   11 |   
+[0]  ✓ Compiled in 1729ms (8326 modules)
+[0]  GET /_next/static/chunks/app/rooms/layout.js 404 in 19497ms
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 19497ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 19498ms
+[0]  GET /_next/static/chunks/app/rooms/%5BroomId%5D/page.js 404 in 19498ms
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
+[0]  GET /rooms/serpent-pit 200 in 4330ms
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
+[0]  ⨯ TypeError: Cannot read properties of undefined (reading 'call')
+[0]     at Object.__webpack_require__ [as require] (.next/server/webpack-runtime.js:33:43) {
+[0]   digest: '1679763045'
+[0] }
