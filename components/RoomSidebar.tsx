@@ -16,9 +16,6 @@ interface RoomSidebarProps {
 
 export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
   const [isOpen, setIsOpen] = useState(currentRoomId === 'home');
-  
-  // Make sure to import DialogTitle from your UI components
-  import { DialogTitle } from "@/components/ui/dialog";
   const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {
     const expanded = new Set<string>();
     if (currentRoomId === 'home') {
