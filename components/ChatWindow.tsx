@@ -19,7 +19,7 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const response = await fetch(`/api/rooms/${roomId}`);
+        const response = await fetch(`/api/rooms/${roomId}/history`);
         if (!response.ok) {
           throw new Error('Failed to fetch room');
         }
