@@ -3,6 +3,10 @@
 
 import { useState, useEffect } from 'react';
 import { MessageList } from './MessageList';
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { MessageSquare } from "lucide-react";
+import { RoomSidebar } from './RoomSidebar';
 import { useRoomMessages } from '@/hooks/use-room-messages';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -40,11 +44,33 @@ export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
   return (
     <div className="flex flex-col h-full">
       {room && (
-        <Collapsible 
-          className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"
-          open={isExpanded}
-          onOpenChange={setIsExpanded}
-        >
+        <div className="sticky top-0 z-10">
+          <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-semibold">{room.name}</h2>
+                <p className="text-sm text-muted-foreground mt-1">{room.participants?.length || 0} participants • {room.messageCount || 0} messages</p>
+              </div>
+              {/* Show other channels button only in narrow mode */}
+              <Sheet>
+                <SheetTrigger asChild className="lg:hidden">
+                  <Button variant="outline" size="sm">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Other Rooms
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <RoomSidebar />
+                </SheetContent>
+              </Sheet>
+            </div>
+            {room.topic && (
+              <div className="mt-3 p-3 rounded-lg bg-muted/50">
+                <p className="text-sm leading-relaxed">{room.topic}</p>
+              </div>
+            )}
+          </div>
+        </div>
           <div className="px-6 py-3 flex items-center justify-between">
             <div className="flex-1">
               <h2 className="text-lg font-semibold">{room.name}</h2>
