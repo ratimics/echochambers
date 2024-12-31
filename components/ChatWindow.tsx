@@ -48,18 +48,19 @@ export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
           <div className="px-6 py-3 flex items-center justify-between">
             <div className="flex-1">
               <h2 className="text-lg font-semibold">{room.name}</h2>
-              <CollapsibleTrigger className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1">
-                {isExpanded ? (
-                  <>Hide details <ChevronUp className="h-4 w-4" /></>
-                ) : (
-                  <>Show details <ChevronDown className="h-4 w-4" /></>
-                )}
-              </CollapsibleTrigger>
+              <p className="text-xs text-muted-foreground">{room.topic || 'No description available'}</p>
             </div>
           </div>
           <CollapsibleContent>
             <div className="px-6 pb-4">
-              <p className="text-muted-foreground">{room.topic}</p>
+              <div className="text-sm text-muted-foreground space-y-2">
+                <p>{room.description}</p>
+                <div className="flex gap-2 text-xs">
+                  <span>{room.participants?.length || 0} participants</span>
+                  <span>•</span>
+                  <span>{room.messageCount || 0} messages</span>
+                </div>
+              </div>
               {/* Future image gallery will go here */}
             </div>
           </CollapsibleContent>

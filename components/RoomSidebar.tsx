@@ -63,15 +63,9 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
               </div>
             </div>
           </Link>
-          <CollapsibleTrigger 
-            onClick={() => toggleRoomExpansion(r.id)}
-            className="w-full text-xs text-gray-400 hover:text-gray-300 p-1 flex items-center justify-center"
-          >
-            {expandedRooms.has(r.id) ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </CollapsibleTrigger>
           <CollapsibleContent>
-            <div className="px-4 py-2 text-sm text-gray-400">
-              {r.topic}
+            <div className="px-4 py-2 text-xs text-gray-400 border-l border-gray-700 ml-4 mt-1">
+              {r.topic || 'No description available'}
             </div>
           </CollapsibleContent>
         </Collapsible>
