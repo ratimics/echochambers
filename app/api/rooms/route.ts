@@ -9,9 +9,10 @@ export async function GET(request: Request) {
     const tags = searchParams.get("tags")?.split(",") || [];
     
     const rooms = await listRooms(tags);
-    console.log('Available rooms:', rooms); // Debug log
+    const activeRooms = rooms.filter(room => room.messageCount > 0);
+    console.log('Active rooms:', activeRooms);
     
-    return NextResponse.json({ rooms });
+    return NextResponse.json({ rooms: activeRooms });
   } catch (error) {
     console.error('Error in GET /api/rooms:', error);
     return NextResponse.json(

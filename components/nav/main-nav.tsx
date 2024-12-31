@@ -23,12 +23,6 @@ export function MainNav() {
             active: pathname === "/",
         },
         {
-            href: "/about",
-            label: "About",
-            icon: BookOpen,
-            active: pathname === "/about",
-        },
-        {
             href: "/rooms",
             label: "Rooms",
             icon: MessageSquare,
