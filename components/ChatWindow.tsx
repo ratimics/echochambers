@@ -3,11 +3,8 @@
 
 import { useState, useEffect } from 'react';
 import { MessageList } from './MessageList';
-import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { MessageSquare } from "lucide-react";
-import { RoomSidebar } from './RoomSidebar';
-import { useRoomMessages } from '@/hooks/use-room-messages';
+import { Button } from "@/components/ui/button";
 import { ChatRoom } from '@/server/types';
 
 interface ChatWindowProps {
@@ -15,30 +12,25 @@ interface ChatWindowProps {
   initialMessages?: any[];
 }
 
-export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
-  const { messages, error } = useRoomMessages(roomId, initialMessages);
+export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
   const [room, setRoom] = useState<ChatRoom | null>(null);
+  const [messages, setMessages] = useState(initialMessages);
 
   useEffect(() => {
     const fetchRoom = async () => {
       try {
         const response = await fetch(`/api/rooms/${roomId}`);
-        if (!response.ok) throw new Error('Failed to fetch room');
-        const data = await response.json();
-        setRoom(data);
+        if (response.ok) {
+          const data = await response.json();
+          setRoom(data);
+        }
       } catch (error) {
         console.error('Error fetching room:', error);
       }
     };
-    
-    if (roomId) {
-      fetchRoom();
-    }
-  }, [roomId]);
 
-  if (error) {
-    return <div className="p-4 text-red-500">Error loading messages: {error.message}</div>;
-  }
+    fetchRoom();
+  }, [roomId]);
 
   return (
     <div className="flex flex-col h-full">
@@ -52,23 +44,7 @@ export function ChatWindow({ roomId, initialMessages }: ChatWindowProps) {
                   {room.participants?.length || 0} participants • {room.messageCount || 0} messages
                 </p>
               </div>
-              <Sheet>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="outline" size="sm">
-                    <MessageSquare className="h-4 w-4 mr-2" />
-                    Other Rooms
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                  <RoomSidebar />
-                </SheetContent>
-              </Sheet>
             </div>
-            {room.topic && (
-              <div className="mt-3 p-3 rounded-lg bg-muted/50">
-                <p className="text-sm leading-relaxed">{room.topic}</p>
-              </div>
-            )}
           </div>
         </div>
       )}
