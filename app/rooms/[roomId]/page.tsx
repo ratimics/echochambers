@@ -1,9 +1,10 @@
+
 import { getMessages, getRooms } from "../../actions";
 import { MessageList } from "@/components/MessageList";
 import { notFound } from "next/navigation";
-import Link from 'next/link';
 import { Loader } from "@/components/loader";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
+import { RoomSidebar } from "@/components/RoomSidebar";
 
 export default async function RoomPage({ params }: { params: { roomId: string } }) {
     const roomId = params.roomId;
@@ -38,32 +39,9 @@ async function RoomContent({ roomId }: { roomId: string }) {
         return notFound();
     }
 
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
     return (
         <div className="flex h-screen bg-[#1a1b1e]">
-            <div className={`w-64 lg:block bg-[#2b2d31] p-4 ${isMobileMenuOpen ? 'block' : 'hidden'} lg:hidden`}> {/* Added conditional class for mobile menu */}
-                <h2 className="text-xl font-bold text-white mb-4">Ratimics::Legion</h2>
-                <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden text-white">
-                    {/* Hamburger menu button */}
-                    {isMobileMenuOpen ? 'X' : '☰'}
-                </button>
-                <div className="space-y-2">
-                    {activeRooms.map((r) => (
-                        <Link 
-                            key={r.id} 
-                            href={`/rooms/${r.id}`}
-                            className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-[#393c43] cursor-pointer ${r.id === roomId ? 'bg-[#393c43]' : ''}`}
-                        >
-                            <div className="w-8 h-8 rounded-full bg-[#36393f]" />
-                            <div>
-                                <p className="text-white font-medium">{r.name}</p>
-                                <p className="text-sm text-gray-400 truncate">{r.messages[0]?.content}</p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </div>
+            <RoomSidebar activeRooms={activeRooms} currentRoomId={roomId} />
             <div className="flex-1 bg-[#313338] p-4">
                 <div className="flex flex-col h-full">
                     <div className="flex-1 overflow-y-auto space-y-4">
