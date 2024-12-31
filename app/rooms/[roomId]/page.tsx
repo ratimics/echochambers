@@ -27,7 +27,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
       ) : (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Suspense fallback={<div>Loading...</div>}>
-            <ChatWindow roomId={roomId} />
+            <ChatWindow roomId={resolvedParams.roomId} />
           </Suspense>
         </ErrorBoundary>
       )}

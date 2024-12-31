@@ -17,6 +17,9 @@ interface MobileRoomSelectProps {
 
 export function MobileRoomSelect({ activeRooms, currentRoomId }: MobileRoomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Make sure to import DialogTitle from your UI components
+  import { DialogTitle } from "@/components/ui/dialog";
 
   return (
     <div className="block lg:hidden ml-2">
