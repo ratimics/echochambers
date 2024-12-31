@@ -48,44 +48,46 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
           open={expandedRooms.has(room.id)}
           onOpenChange={() => toggleRoom(room.id)}
         >
-          <div className="flex items-center justify-between">
-            <CollapsibleTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-full justify-start gap-2"
-              >
-                <MessageSquare className="h-4 w-4" />
-                <span className="truncate">{room.name}</span>
-                {expandedRooms.has(room.id) ? (
-                  <ChevronUp className="h-4 w-4 ml-auto" />
-                ) : (
-                  <ChevronDown className="h-4 w-4 ml-auto" />
-                )}
-              </Button>
-            </CollapsibleTrigger>
-          </div>
-          <CollapsibleContent className="space-y-2">
-            <div className="pl-4 py-2">
-              <p className="text-sm text-muted-foreground">{room.topic}</p>
-              <div className="flex items-center gap-2 mt-2">
-                <Users className="h-4 w-4" />
-                <span className="text-sm text-muted-foreground">
-                  {room.participants?.length || 0} participants
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {room.tags?.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs bg-muted px-2 py-1 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          <Link href={`/rooms/${room.id}`} className="block">
+            <div className="flex items-center justify-between">
+              <CollapsibleTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-start gap-2"
+                >
+                  <MessageSquare className="h-4 w-4" />
+                  <span className="truncate">{room.name}</span>
+                  {expandedRooms.has(room.id) ? (
+                    <ChevronUp className="h-4 w-4 ml-auto" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 ml-auto" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
             </div>
-          </CollapsibleContent>
+            <CollapsibleContent className="space-y-1">
+              <div className="pl-4 py-1">
+                <p className="text-xs text-muted-foreground">{room.topic}</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <Users className="h-3 w-3" />
+                  <span className="text-xs text-muted-foreground">
+                    {room.participants?.length || 0} participants
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {room.tags?.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs bg-muted px-1.5 py-0.5 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </CollapsibleContent>
+          </Link>
         </Collapsible>
       ))}
     </div>
