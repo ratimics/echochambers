@@ -6,10 +6,12 @@ export class PostgresAdapter implements DatabaseAdapter {
   private pool: Pool | null = null;
   
   async initialize(): Promise<void> {
-    this.pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-    });
+    const dbUrl = process.env.DATABASE_URL!.replace('.us-east-2', '-pooler.us-east-2');
+  this.pool = new Pool({
+    connectionString: dbUrl,
+    max: 10,
+    ssl: { rejectUnauthorized: false }
+  });
     
     await this.pool.query(`
       CREATE TABLE IF NOT EXISTS rooms (
