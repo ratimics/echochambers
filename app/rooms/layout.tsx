@@ -11,11 +11,9 @@ export default function RoomsLayout({ children }: { children: React.ReactNode })
   return (
     <div className="flex h-screen">
       <RoomSidebar activeRooms={rooms} />
-      <main className="flex-1 bg-[#313338]">
-        <Suspense fallback={<Loader />}>
-          {children}
-        </Suspense>
-      </main>
+      <Suspense fallback={<Loader />}>
+        {children}
+      </Suspense>
     </div>
   );
 }
