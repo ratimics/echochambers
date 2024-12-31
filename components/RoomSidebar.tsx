@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Dialog, DialogTitle, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogTitle } from "@/components/ui/dialog";
 
 interface RoomSidebarProps {
   activeRooms?: ChatRoom[];
@@ -19,60 +20,67 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
   const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {
     const expanded = new Set<string>();
     if (currentRoomId === 'home') {
-      activeRooms.forEach(room => expanded.add(room.id));
+      expanded.add('home');
     }
     return expanded;
   });
 
-  const filteredRooms = useCallback(() => {
-    return activeRooms
-      .filter(room => room.messageCount > 0)
-      .sort((a, b) => b.messageCount - a.messageCount);
-  }, [activeRooms]);
-
-  const toggleRoomExpansion = (roomId: string) => {
-    const newExpanded = new Set(expandedRooms);
-    if (newExpanded.has(roomId)) {
-      newExpanded.delete(roomId);
-    } else {
-      newExpanded.add(roomId);
-    }
-    setExpandedRooms(newExpanded);
-  };
+  const toggleRoom = useCallback((roomId: string) => {
+    setExpandedRooms(prev => {
+      const next = new Set(prev);
+      if (next.has(roomId)) {
+        next.delete(roomId);
+      } else {
+        next.add(roomId);
+      }
+      return next;
+    });
+  }, []);
 
   const SidebarContent = () => (
     <div className="space-y-2">
-      {filteredRooms().map((r) => (
-        <Collapsible key={r.id}>
-          <Link 
-            href={`/rooms/${r.id}`}
-            className={`flex items-center space-x-3 p-2 rounded-lg hover:bg-[#393c43] cursor-pointer ${
-              r.id === currentRoomId ? 'bg-[#393c43]' : ''
-            }`}
-          >
-            <div className="w-8 h-8 rounded-full bg-[#36393f] flex items-center justify-center">
-              <MessageSquare className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center justify-between">
-                <p className="text-white font-medium">{r.name}</p>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs text-gray-400 flex items-center">
-                    <Users className="w-3 h-3 mr-1" />
-                    {r.participants?.length || 0}
-                  </span>
-                  <span className="text-xs text-gray-400 flex items-center">
-                    <MessageSquare className="w-3 h-3 mr-1" />
-                    {r.messageCount}
-                  </span>
-                </div>
+      {activeRooms.map((room) => (
+        <Collapsible
+          key={room.id}
+          open={expandedRooms.has(room.id)}
+          onOpenChange={() => toggleRoom(room.id)}
+        >
+          <div className="flex items-center justify-between">
+            <CollapsibleTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-full justify-start gap-2"
+              >
+                <MessageSquare className="h-4 w-4" />
+                <span className="truncate">{room.name}</span>
+                {expandedRooms.has(room.id) ? (
+                  <ChevronUp className="h-4 w-4 ml-auto" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 ml-auto" />
+                )}
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          <CollapsibleContent className="space-y-2">
+            <div className="pl-4 py-2">
+              <p className="text-sm text-muted-foreground">{room.topic}</p>
+              <div className="flex items-center gap-2 mt-2">
+                <Users className="h-4 w-4" />
+                <span className="text-sm text-muted-foreground">
+                  {room.participants?.length || 0} participants
+                </span>
               </div>
-            </div>
-          </Link>
-          <CollapsibleContent>
-            <div className="px-4 py-2 text-xs text-gray-400 border-l border-gray-700 ml-4 mt-1">
-              <div className="font-medium mb-1">{r.name}</div>
-              <div className="opacity-80">{r.topic || 'No description available'}</div>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {room.tags?.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs bg-muted px-2 py-1 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </CollapsibleContent>
         </Collapsible>
@@ -88,11 +96,15 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
         <SidebarContent />
       </div>
 
-      {/* Mobile Sheet */}
+      {/* Mobile Sidebar */}
       <div className="lg:hidden">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-50">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="fixed left-4 top-4 z-40"
+            >
               <MessageSquare className="h-5 w-5" />
             </Button>
           </SheetTrigger>
