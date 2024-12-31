@@ -1,10 +1,12 @@
 
+"use client";
+
 import { use } from "react";
 import { Suspense } from "react";
 import { ChatWindow } from "@/components/ChatWindow";
 import { ErrorBoundary } from "react-error-boundary";
 
-function ErrorFallback({error}: {error: Error}) {
+function ErrorFallback({ error }: { error: Error }) {
   return (
     <div className="flex h-full items-center justify-center text-destructive">
       <p>Error: {error.message}</p>
@@ -12,9 +14,9 @@ function ErrorFallback({error}: {error: Error}) {
   );
 }
 
-export default function RoomPage({ params }: { params: Promise<{ roomId: string }> }) {
-  const resolvedParams = use(params);
-  const isHomeRoom = resolvedParams.roomId === 'home';
+export default function RoomPage({ params }: { params: { roomId: string } }) {
+  const roomId = params.roomId;
+  const isHomeRoom = roomId === 'home';
   
   return (
     <div className="flex-1 flex flex-col">
@@ -25,7 +27,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
       ) : (
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Suspense fallback={<div>Loading...</div>}>
-            <ChatWindow roomId={resolvedParams.roomId} />
+            <ChatWindow roomId={roomId} />
           </Suspense>
         </ErrorBoundary>
       )}
