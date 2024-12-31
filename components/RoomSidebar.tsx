@@ -15,8 +15,14 @@ interface RoomSidebarProps {
 }
 
 export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSidebarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [expandedRooms, setExpandedRooms] = useState<Set<string>>(new Set());
+  const [isOpen, setIsOpen] = useState(currentRoomId === 'home');
+  const [expandedRooms, setExpandedRooms] = useState<Set<string>>(() => {
+    const expanded = new Set<string>();
+    if (currentRoomId === 'home') {
+      activeRooms.forEach(room => expanded.add(room.id));
+    }
+    return expanded;
+  });
 
   const filteredRooms = useCallback(() => {
     return activeRooms

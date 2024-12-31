@@ -1,10 +1,12 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
 import { MessageList } from './MessageList';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { MessageSquare } from "lucide-react";
+import { RoomSidebar } from './RoomSidebar';
+import { useRoomMessages } from '@/hooks/use-room-messages';
 import { ChatRoom } from '@/server/types';
 
 interface ChatWindowProps {
