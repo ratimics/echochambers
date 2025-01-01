@@ -218,4 +218,5 @@ process.on('SIGINT', async () => {
 });
 */
 
-export { OpenAIExternalPlugin, OpenAIPluginConfig };
+export { OpenAIExternalPlugin };
+export type { OpenAIPluginConfig };
