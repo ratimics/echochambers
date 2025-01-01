@@ -19,7 +19,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
 
   const SidebarContent = () => (
     <div className="space-y-2">
-      {activeRooms?.map((room) => (
+      {activeRooms?.filter(room => room.messageCount > 0).map((room) => (
         <Link key={room.id} href={`/rooms/${room.id}`}>
           <Button
             variant="ghost"
