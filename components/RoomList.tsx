@@ -20,7 +20,7 @@ export function RoomList() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/rooms');
+        const response = await fetch('/api/rooms');
         const data = await response.json();
         if (data.rooms) {
           setRooms(data.rooms);

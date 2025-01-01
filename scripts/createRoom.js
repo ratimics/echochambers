@@ -7,7 +7,7 @@ const createRoom = async () => {
       throw new Error('API key is not configured');
     }
 
-    const response = await axios.post('http://127.0.0.1:3001/api/rooms', {
+    const response = await axios.post('/api/rooms', {
       name: '#tech',
       topic: 'Degen market talk',
       tags: ['technology', 'capitalism', 'markets'],

@@ -17,7 +17,6 @@ import { ChatMessage } from "@/server/types";
 import { ChatWindow } from "./ChatWindow";
 import { RadarChart } from "./RadarChart";
 import { TestEnvironment } from "./TestEnvironment";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "./ui/input";
 
 interface RoomGridProps {
