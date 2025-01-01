@@ -10,18 +10,22 @@ const nextConfig = {
   
   // API rewrites
   async rewrites() {
-    const roomsPort = 3031;
-    const pluginsPort = 3032;
+    const roomsPort = 3001; // Assumed port for rooms API
+    const pluginsPort = 3001; // Assumed port for plugins API (or adjust as needed)
+
+    // Using 0.0.0.0 to make the server accessible externally.  Adjust if necessary.
+    const serverAddress = process.env.NODE_ENV === 'development' ? '0.0.0.0' : 'localhost';
+
 
     return process.env.NODE_ENV === 'development' 
       ? [
           {
             source: '/api/rooms/:path*',
-            destination: `http://127.0.0.1:${roomsPort}/api/rooms/:path*`
+            destination: `http://${serverAddress}:${roomsPort}/api/rooms/:path*`
           },
           {
             source: '/api/plugins/:path*',
-            destination: `http://127.0.0.1:${pluginsPort}/api/plugins/:path*`
+            destination: `http://${serverAddress}:${pluginsPort}/api/plugins/:path*`
           }
         ]
       : [];
