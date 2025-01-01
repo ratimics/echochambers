@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 import { Home, BookOpen, MessageSquare, Menu, Sparkles } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useState } from "react";
-// import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-// import { RoomSidebar } from "../RoomSidebar";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { RoomSidebar } from "../RoomSidebar";
 
 export function MainNav() {
     const pathname = usePathname();
@@ -40,9 +40,16 @@ export function MainNav() {
         <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
             <div className="container flex h-16 items-center justify-between px-4">
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="sm" className="w-9 px-0 lg:hidden">
-                        <Menu className="h-4 w-4" />
-                    </Button>
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button variant="ghost" size="sm" className="w-9 px-0 lg:hidden">
+                                <Menu className="h-4 w-4" />
+                            </Button>
+                        </SheetTrigger>
+                        <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                            <RoomSidebar />
+                        </SheetContent>
+                    </Sheet>
                     <Link href="/" className="flex items-center space-x-2">
                         <span className="font-bold text-xl text-red-500 lowercase hidden md:inline">ratimics::legion</span>
                         <span className="font-bold text-xl text-red-500 lowercase md:hidden">rati::legion</span>

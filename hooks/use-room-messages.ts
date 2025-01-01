@@ -12,9 +12,21 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
     const [retryCount, setRetryCount] = useState(0);
 
     const fetchMessages = useCallback(async () => {
+        if (!roomId) return;
+        
         try {
-            const response = await fetch(`/api/rooms/${roomId}/history`);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const response = await fetch(`/api/rooms/${roomId}/history`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                cache: 'no-store'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const data = await response.json();
             if (data.messages) {
                 setMessages(data.messages);
@@ -37,14 +49,15 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
         let intervalId: NodeJS.Timeout;
 
         const initFetch = async () => {
-            if (mounted && (!initialMessages || initialMessages.length === 0)) {
+            if (mounted) {
+                setLoading(true);
                 await fetchMessages();
             }
         };
 
         initFetch();
 
-        if (mounted && retryCount < MAX_RETRIES) {
+        if (mounted && !error) {
             intervalId = setInterval(fetchMessages, POLL_INTERVAL);
         }
 
@@ -52,7 +65,7 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
             mounted = false;
             if (intervalId) clearInterval(intervalId);
         };
-    }, [roomId]); // Only depend on roomId to prevent unnecessary re-renders
+    }, [fetchMessages, error]);
 
     return { messages, loading, error };
 }
