@@ -4,11 +4,9 @@ import Link from 'next/link';
 import { useState, useCallback } from 'react';
 import { MessageSquare, Users } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { DialogTitle } from "@/components/ui/dialog";
-import { VisuallyHidden } from "@/components/ui/visually-hidden"; // Import VisuallyHidden
 
 
 interface RoomSidebarProps {
@@ -77,9 +75,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetContent side="left" className="w-64 p-0">
-          <VisuallyHidden>
-            <DialogTitle>Room Selection</DialogTitle>
-          </VisuallyHidden>
+          <SheetTitle className="sr-only">Room Selection</SheetTitle>
           <div className="p-4">
             <h1 className="text-xl font-bold text-red-500 mb-4 lowercase">ratimics::legion</h1>
             <SidebarContent />
