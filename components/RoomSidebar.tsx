@@ -7,6 +7,7 @@ import { MessageSquare, Users, Menu } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { DialogTitle } from "@/components/ui/dialog";
 
 interface RoomSidebarProps {
   activeRooms?: ChatRoom[];
@@ -63,6 +64,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-64 p-0">
+          <DialogTitle className="sr-only">Room List</DialogTitle>
           <div className="p-4">
             <h2 className="text-xs font-bold mb-4 lowercase">chambers</h2>
             <SidebarContent />
