@@ -37,21 +37,22 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
         let intervalId: NodeJS.Timeout;
 
         const initFetch = async () => {
-            if (mounted && !initialMessages) {
+            if (mounted && (!initialMessages || initialMessages.length === 0)) {
                 await fetchMessages();
-            }
-            if (mounted && retryCount < MAX_RETRIES) {
-                intervalId = setInterval(fetchMessages, POLL_INTERVAL);
             }
         };
 
         initFetch();
 
+        if (mounted && retryCount < MAX_RETRIES) {
+            intervalId = setInterval(fetchMessages, POLL_INTERVAL);
+        }
+
         return () => {
             mounted = false;
             if (intervalId) clearInterval(intervalId);
         };
-    }, [fetchMessages, initialMessages, retryCount]);
+    }, [roomId]); // Only depend on roomId to prevent unnecessary re-renders
 
     return { messages, loading, error };
 }
