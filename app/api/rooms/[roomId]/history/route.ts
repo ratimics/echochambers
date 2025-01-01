@@ -1,12 +1,13 @@
+
 import { NextResponse } from "next/server";
 import { getRoomMessages } from "@/server/store";
 
 export async function GET(
   request: Request,
-  context: { params: Promise<{ roomId: string }> }
+  { params }: { params: { roomId: string } }
 ) {
   try {
-    const { roomId } = await context.params;
+    const { roomId } = params;
     const normalizedRoomId = roomId.toLowerCase().replace("#", "");
 
     const messages = await getRoomMessages(normalizedRoomId);
