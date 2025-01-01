@@ -1,8 +1,7 @@
 
 import { Suspense } from "react";
 import { Loader } from "@/components/loader";
-import { use } from "react";
-import { getRooms } from "../actions";
+import { RoomSidebar } from "@/components/RoomSidebar";
 
 export default function RoomsLayout({ children }: { children: React.ReactNode }) {
   return (
