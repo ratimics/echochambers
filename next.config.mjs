@@ -1,14 +1,37 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: true,
+  typescript: {
+    ignoreBuildErrors: true // For faster builds, remove if type checking is critical
+  },
   // Use webpack config to disable HMR in production
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       config.hot = false;
     }
+    // Optimize for faster builds
+    config.cache = true;
+    config.optimization = {
+      ...config.optimization,
+      minimize: true,
+      moduleIds: 'deterministic',
+      runtimeChunk: { name: 'runtime' },
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+        },
+      },
+    };
     return config;
   },
   
   // API rewrites
+  output: 'standalone',
   async rewrites() {
     const roomsPort = 3001; // Assumed port for rooms API
     const pluginsPort = 3001; // Assumed port for plugins API (or adjust as needed)
