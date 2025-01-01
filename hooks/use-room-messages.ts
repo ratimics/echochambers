@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { ChatMessage } from '@/server/types';
 
@@ -33,8 +32,10 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
                 setRetryCount(0);
                 setError(null);
             }
-        } catch (err) {
+        } catch (err: any) {
             console.error('Error fetching messages:', err);
+            setError(err.message || 'Failed to fetch messages. Please try again.');
+            setMessages([]); // Reset messages on error
             setRetryCount(prev => prev + 1);
             if (retryCount >= MAX_RETRIES) {
                 setError(err instanceof Error ? err : new Error('Failed to fetch messages'));

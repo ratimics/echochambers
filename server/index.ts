@@ -33,12 +33,20 @@ app.use((req: Request, res: Response, _next: NextFunction) => {
   res.status(404).json({ error: `Route not found: ${req.method} ${req.url}` });
 });
 
+// Add error handling middleware
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error('Server error:', err);
+  res.status(500).json({ error: 'Internal server error', details: err.message });
+});
+
 async function startServer() {
   try {
     await initializeStore();
     
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
+    }).on('error', (err) => {
+      console.error('Server error:', err);
     });
   } catch (error) {
     console.error('Failed to start server:', error);
