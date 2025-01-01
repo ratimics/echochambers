@@ -1,6 +1,5 @@
 
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 import { listRooms } from "@/server/store";
 import { getRoomMessages } from "@/server/store";
 
