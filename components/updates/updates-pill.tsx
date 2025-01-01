@@ -290,6 +290,7 @@ export function UpdatesPill({ trigger }: UpdatesPillProps = {}) {
                 className={cn("sm:max-w-[555px] w-[calc(100%-3rem)] rounded-xl")}
                 aria-describedby="updates-dialog-description"
             >
+                <DialogTitle className="sr-only">Updates Dialog</DialogTitle>
                 <DialogHeader className="mb-3">
                     <DialogTitle className="text-2xl font-semibold text-center">What's New</DialogTitle>
                     <DialogDescription className="text-center text-muted-foreground" id="updates-dialog-description">
