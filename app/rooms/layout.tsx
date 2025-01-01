@@ -5,12 +5,13 @@ import { use } from "react";
 import { getRooms } from "../actions";
 
 export default function RoomsLayout({ children }: { children: React.ReactNode }) {
-  const rooms = use(getRooms());
-
   return (
     <div className="flex h-screen">
       <Suspense fallback={<Loader />}>
-        {children}
+        <RoomSidebar />
+        <div className="flex-1">
+          {children}
+        </div>
       </Suspense>
     </div>
   );
