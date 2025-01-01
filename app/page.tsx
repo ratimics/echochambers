@@ -15,7 +15,7 @@ export default function HomePage() {
           <p className="text-xs text-muted-foreground">gnon::echochambers</p>
         </div>
         <button
-          onClick={() => router.push('/rooms/home')}
+          onClick={() => router.push('/rooms')}
           className="px-8 py-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 active:shadow-lg mb-8"
         >
           enter the abyss
