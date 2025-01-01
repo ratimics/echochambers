@@ -3,11 +3,12 @@
 
 import Link from 'next/link';
 import { useState, useCallback } from 'react';
-import { MessageSquare, ChevronDown, ChevronUp, Users, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MessageSquare, Users } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { DialogTitle } from "@/components/ui/dialog";
 
 interface RoomSidebarProps {
   activeRooms?: ChatRoom[];
@@ -37,11 +38,9 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
     });
   }, []);
 
-  const activeRoomsWithMessages = activeRooms.filter(room => room.messageCount > 0);
-
   const SidebarContent = () => (
     <div className="space-y-2">
-      {activeRoomsWithMessages.map((room) => (
+      {activeRooms?.map((room) => (
         <Collapsible
           key={room.id}
           open={expandedRooms.has(room.id)}
@@ -66,7 +65,7 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
         </Collapsible>
       ))}
     </div>
-  )
+  );
 
   return (
     <>
@@ -74,6 +73,16 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
         <h2 className="text-xs font-bold text-white mb-4 lowercase pl-8">powered by gnon::chambers</h2>
         <SidebarContent />
       </div>
+
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetContent side="left" className="w-64 p-0">
+          <DialogTitle>Rooms</DialogTitle>
+          <div className="p-4">
+            <h1 className="text-xl font-bold text-red-500 mb-4 lowercase">ratimics::legion</h1>
+            <SidebarContent />
+          </div>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }
