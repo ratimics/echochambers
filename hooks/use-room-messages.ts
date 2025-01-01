@@ -14,6 +14,11 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
         if (!roomId) return;
         
         try {
+            if (!roomId) {
+                setError(new Error('Room ID is required'));
+                return;
+            }
+
             const response = await fetch(`/api/rooms/${roomId}/history`, {
                 method: 'GET',
                 headers: {
@@ -21,6 +26,11 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
                 },
                 cache: 'no-store'
             });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            }
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);

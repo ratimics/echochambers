@@ -1,35 +1,32 @@
 
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 import { getRoomMessages } from "@/server/store";
 
 export async function GET(
-  request: Request,
-  { params }: { params: { roomId: string } }
+  req: Request,
+  context: { params: { roomId: string } }
 ) {
   try {
-    const { roomId } = params;
-    const normalizedRoomId = roomId.toLowerCase().replace("#", "");
-
-    const messages = await getRoomMessages(normalizedRoomId);
+    const { roomId } = context.params;
     
-    if (!messages) {
+    if (!roomId) {
       return NextResponse.json(
-        { error: "Room not found" },
-        { status: 404 }
+        { error: "Room ID is required" },
+        { status: 400 }
       );
     }
 
+    const messages = await getRoomMessages(roomId);
+    
     return NextResponse.json({ 
-      messages,
-      roomId: normalizedRoomId
+      messages: messages || [],
+      timestamp: new Date().toISOString()
     });
-  } catch (error) {
-    console.error('Error fetching room history:', error);
+
+  } catch (error: any) {
+    console.error(`Error fetching messages for room ${context.params.roomId}:`, error);
     return NextResponse.json(
-      { 
-        error: "Failed to fetch room history",
-        details: error instanceof Error ? error.message : String(error)
-      },
+      { error: error.message || "Failed to fetch messages" },
       { status: 500 }
     );
   }
