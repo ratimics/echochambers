@@ -7,6 +7,7 @@ import { MessageSquare, Users, Menu } from 'lucide-react';
 import { ChatRoom } from '@/server/types';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { DialogTitle } from "@/components/ui/dialog";
 
 interface RoomSidebarProps {
   activeRooms?: ChatRoom[];
