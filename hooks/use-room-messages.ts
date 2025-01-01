@@ -32,16 +32,14 @@ export function useRoomMessages(roomId: string, initialMessages?: ChatMessage[])
                 throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
             }
             
+            const data = await response.json();
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(data.error || `HTTP error! status: ${response.status}`);
             }
             
-            const data = await response.json();
-            if (data.messages) {
-                setMessages(data.messages);
-                setRetryCount(0);
-                setError(null);
-            }
+            setMessages(data.messages || []);
+            setRetryCount(0);
+            setError(null);
         } catch (err: any) {
             console.error('Error fetching messages:', err);
             setError(err.message || 'Failed to fetch messages. Please try again.');
