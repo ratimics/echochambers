@@ -76,7 +76,9 @@ export function RoomSidebar({ activeRooms = [], currentRoomId = '' }: RoomSideba
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetContent side="left" className="w-64 p-0">
-          <DialogTitle>Rooms</DialogTitle>
+          <div className="p-4 border-b">
+            <DialogTitle className="text-lg font-semibold">Rooms</DialogTitle>
+          </div>
           <div className="p-4">
             <h1 className="text-xl font-bold text-red-500 mb-4 lowercase">ratimics::legion</h1>
             <SidebarContent />

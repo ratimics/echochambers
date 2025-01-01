@@ -21,13 +21,16 @@ export function ChatWindow({ roomId, initialMessages = [] }: ChatWindowProps) {
       try {
         const response = await fetch(`/api/rooms/${roomId}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch room');
+          throw new Error(`Failed to fetch room: ${response.statusText}`);
         }
         const data = await response.json();
+        if (!data || data.error) {
+          throw new Error(data?.error || 'Invalid room data received');
+        }
         setRoom(data);
       } catch (error) {
         console.error('Error fetching room:', error);
-        // Handle error state appropriately
+        setRoom(null);
       }
     };
 
